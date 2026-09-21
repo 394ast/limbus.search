@@ -75,6 +75,12 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
           <button class="condition-button" id="idWeakButton">脆弱条件追加</button>
         </div>
         <div class="condition-group">
+          <select id="idAttackSelect">
+            <option value="斬撃">斬撃</option><option value="貫通">貫通</option><option value="打撃">打撃</option>
+          </select>
+          <button class="condition-button" id="idAttackButton">攻撃条件追加</button>
+        </div>
+        <div class="condition-group">
           <select id="idDefenseSelect">
             <option value="防御">ガード</option><option value="回避">回避</option><option value="反撃">反撃</option><option value="M防御">マッチ可能ガード</option><option value="M反撃">マッチ可能反撃</option>
           </select>
@@ -263,6 +269,7 @@ document.querySelectorAll(".op-button").forEach(button=>button.addEventListener(
 
 document.getElementById("idResistButton").addEventListener("click",()=>{const key=document.getElementById("idResistSelect").value;const label=`${key}耐性`;const csvKey=`${key}耐性`;addToken("identity",conditionToken(label,row=>Number(row[csvKey])===0.5))});
 document.getElementById("idWeakButton").addEventListener("click",()=>{const key=document.getElementById("idWeakSelect").value;const label=`${key}脆弱`;const csvKey=`${key}耐性`;addToken("identity",conditionToken(label,row=>Number(row[csvKey])===2))});
+document.getElementById("idAttackButton").addEventListener("click",()=>{const key=document.getElementById("idAttackSelect").value;addToken("identity",conditionToken(`[${key}攻撃]`,row=>Number(row[key])===1))});
 document.getElementById("idDefenseButton").addEventListener("click",()=>{const key=document.getElementById("idDefenseSelect").value;const labels={防御:"ガード",回避:"回避",反撃:"反撃",M防御:"マッチ可能ガード",M反撃:"マッチ可能反撃"};addToken("identity",conditionToken(`[${labels[key]}]`,row=>Number(row[key])===1))});
 document.getElementById("idSinButton").addEventListener("click",()=>{const key=document.getElementById("idSinSelect").value;addToken("identity",conditionToken(`[${key}]`,row=>Number(row[key])===1))});
 document.getElementById("idEffectButton").addEventListener("click",()=>{const key=document.getElementById("idEffectSelect").value;addToken("identity",conditionToken(`[${key}]`,row=>Number(row[key])===1))});
