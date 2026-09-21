@@ -219,7 +219,7 @@ function parseExpression(tokens){
   function parseUnary(){if(peek()?.type==="op"&&peek().value==="NOT"){consume();const target=parseUnary();return row=>!target(row)}return parsePrimary()}
   function parsePrimary(){const token=peek();if(!token)throw new Error("条件が必要な場所で式が終わっています。");if(token.type==="condition"){consume();return token.fn}if(token.type==="op"&&token.value==="LPAREN"){consume();const inside=parseOr(),close=consume();if(!close||close.type!=="op"||close.value!=="RPAREN")throw new Error("「(」に対応する「)」がありません。");return inside}throw new Error("この位置には条件または「(」が必要です。")}
   const fn=parseOr();
-  if(pos<tokens.length){const t=tokens[pos];if(t.type==="op"&&t.value==="RPAREN")throw new Error("対応する「(」がない「)」があります。");throw new Error("論理式のつなぎ方が不正です。")}
+  if(pos<tokens.length){const t=tokens[pos];if(t.type==="op"&&t.value==="RPAREN")throw new Error("対応する「(」がない「)」があります。");throw new Error("論理式のつなぎ方が不正です。（条件と条件の間に∧（かつ）もしくは∨（または）をはさむ必要があります）")}
   return fn;
 }
 function setError(mode,message){document.getElementById(mode==="identity"?"identityError":"egoError").textContent=message||""}
