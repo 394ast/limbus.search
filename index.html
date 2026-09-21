@@ -5,203 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>リンバス人格・E.G.O検索</title>
 <style>
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #f5f5f5;
-    color: #222;
-  }
-  .page {
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 16px;
-  }
-  h1 {
-    margin: 0 0 14px;
-    font-size: 24px;
-  }
-  .tabs {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 14px;
-  }
-  .tab-button {
-    border: 1px solid #aaa;
-    background: #fff;
-    padding: 9px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-  }
-  .tab-button.active {
-    background: #222;
-    color: #fff;
-    border-color: #222;
-  }
-  .panel {
-    display: none;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 14px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.05);
-  }
-  .panel.active { display: block; }
-
-  .control-section {
-    margin-bottom: 14px;
-  }
-  .section-title {
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .button-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    align-items: center;
-  }
-  button {
-    font: inherit;
-  }
-  .op-button, .condition-button {
-    border: 1px solid #aaa;
-    background: #fafafa;
-    border-radius: 7px;
-    padding: 7px 10px;
-    cursor: pointer;
-  }
-  .op-button:hover, .condition-button:hover {
-    background: #eee;
-  }
-  .condition-group {
-    display: inline-flex;
-    gap: 4px;
-    align-items: center;
-    border: 1px solid #ddd;
-    padding: 4px;
-    border-radius: 8px;
-    background: #fafafa;
-  }
-  select, input[type="number"] {
-    font: inherit;
-    padding: 6px 8px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    background: #fff;
-  }
-  input[type="number"] {
-    width: 92px;
-  }
-
-  .expression-box {
-    border: 1px solid #bbb;
-    border-radius: 8px;
-    min-height: 52px;
-    padding: 10px;
-    background: #fcfcfc;
-    margin: 8px 0 10px;
-    word-break: break-word;
-    line-height: 1.8;
-  }
-  .token {
-    display: inline-block;
-    margin: 2px;
-    padding: 3px 7px;
-    border-radius: 5px;
-    background: #ececec;
-    font-size: 14px;
-  }
-  .token.op {
-    background: #ddd;
-    font-weight: 700;
-  }
-  .empty-expression {
-    color: #888;
-  }
-
-  .action-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-  .search-button, .reset-button {
-    border: 0;
-    border-radius: 7px;
-    padding: 9px 16px;
-    cursor: pointer;
-    color: #fff;
-  }
-  .search-button { background: #1f6feb; }
-  .reset-button { background: #666; }
-  .search-button:hover { background: #1757b8; }
-  .reset-button:hover { background: #4e4e4e; }
-  .result-count {
-    font-weight: 700;
-  }
-  .error {
-    color: #b00020;
-    margin: 8px 0;
-    white-space: pre-wrap;
-  }
-
-  .result-group {
-    margin-top: 18px;
-  }
-  .result-group h3 {
-    margin: 0 0 8px;
-    font-size: 17px;
-  }
-  .result-row {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding-bottom: 8px;
-  }
-  .card {
-    flex: 0 0 auto;
-    width: 120px;
-    text-align: center;
-  }
-  .card img {
-    display: block;
-    width: 120px;
-    height: auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: #eee;
-  }
-  .card-name {
-    margin-top: 4px;
-    font-size: 12px;
-    line-height: 1.3;
-  }
-  .card-id {
-    color: #666;
-    font-size: 11px;
-  }
-  .no-result {
-    color: #777;
-    padding: 8px 0;
-  }
-
-  @media (max-width: 700px) {
-    .page { padding: 10px; }
-    .card, .card img { width: 96px; }
-    .panel { padding: 10px; }
-  }
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f5f5;color:#222}
+.page{max-width:1500px;margin:0 auto;padding:16px}
+h1{margin:0 0 8px;font-size:24px}
+.description{margin:0 0 14px;line-height:1.7;font-size:14px;color:#444}
+.description div{margin:2px 0}
+.tabs{display:flex;gap:6px;margin-bottom:14px}
+.tab-button{border:1px solid #aaa;background:#fff;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:15px}
+.tab-button.active{background:#222;color:#fff;border-color:#222}
+.data-status{margin:-4px 0 12px;color:#666;font-size:13px}
+.panel{display:none;background:#fff;border:1px solid #ddd;border-radius:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.panel.active{display:block}
+.control-section{margin-bottom:14px}.section-title{font-weight:700;margin-bottom:8px}
+.button-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+button{font:inherit}.op-button,.condition-button{border:1px solid #aaa;background:#fafafa;border-radius:7px;padding:7px 10px;cursor:pointer}.op-button:hover,.condition-button:hover{background:#eee}
+.condition-group{display:inline-flex;gap:4px;align-items:center;border:1px solid #ddd;padding:4px;border-radius:8px;background:#fafafa}
+select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;border-radius:6px;background:#fff}input[type=number]{width:92px}
+.expression-box{border:1px solid #bbb;border-radius:8px;min-height:52px;padding:10px;background:#fcfcfc;margin:8px 0 10px;word-break:break-word;line-height:1.8}
+.token{display:inline-block;margin:2px;padding:3px 7px;border-radius:5px;background:#ececec;font-size:14px}.token.op{background:#ddd;font-weight:700}.empty-expression{color:#888}
+.action-row{display:flex;gap:8px;align-items:center;margin-bottom:12px}.search-button,.reset-button{border:0;border-radius:7px;padding:9px 16px;cursor:pointer;color:#fff}.search-button{background:#1f6feb}.reset-button{background:#666}.search-button:hover{background:#1757b8}.reset-button:hover{background:#4e4e4e}.result-count{font-weight:700}
+.error{color:#b00020;margin:8px 0;white-space:pre-wrap}
+.result-group{margin-top:18px}.result-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}.card{flex:0 0 auto;width:120px;text-align:center}.card img{display:block;width:120px;height:auto;border:1px solid #ccc;border-radius:5px;background:#eee}.card-name{margin-top:4px;font-size:12px;line-height:1.3}.no-result{color:#777;padding:8px 0}
+@media(max-width:700px){.page{padding:10px}.card,.card img{width:96px}.panel{padding:10px}}
 </style>
 </head>
 <body>
 <div class="page">
   <h1>リンバス人格・E.G.O検索</h1>
+  <div class="description">
+    <div>・データ入力は私の手入力なので、誤りがある可能性があります</div>
+    <div>・プログラムはChatGPTにお任せして私は確認をしてないので、誤りがある可能性があります</div>
+    <div>・属性条件は基本攻撃スキルのみを検索対象にしています（例：リアンを憤怒持ち扱いにしていない）</div>
+    <div>・状態条件は編成画面のフィルターのみを判断材料にしています（例：ヴァレンチーナを呼吸持ち扱いにしている）</div>
+  </div>
 
   <div class="tabs">
     <button class="tab-button active" data-tab="identity">人格検索</button>
     <button class="tab-button" data-tab="ego">EGO検索</button>
   </div>
+  <div id="dataStatus" class="data-status">データを読み込み中...</div>
 
   <section id="identityPanel" class="panel active">
     <div class="control-section">
@@ -219,56 +62,32 @@
       <div class="section-title">人格の条件</div>
       <div class="button-row">
         <div class="condition-group">
-          <select id="idPhysicalSelect">
-            <option value="斬撃">斬撃</option>
-            <option value="貫通">貫通</option>
-            <option value="打撃">打撃</option>
+          <select id="idResistSelect">
+            <option value="斬撃">斬撃耐性</option><option value="貫通">貫通耐性</option><option value="打撃">打撃耐性</option>
           </select>
-          <button class="condition-button" id="idResistButton">耐性</button>
+          <button class="condition-button" id="idResistButton">耐性条件追加</button>
         </div>
-
         <div class="condition-group">
           <select id="idWeakSelect">
-            <option value="斬撃">斬撃</option>
-            <option value="貫通">貫通</option>
-            <option value="打撃">打撃</option>
+            <option value="斬撃">斬撃脆弱</option><option value="貫通">貫通脆弱</option><option value="打撃">打撃脆弱</option>
           </select>
-          <button class="condition-button" id="idWeakButton">脆弱</button>
+          <button class="condition-button" id="idWeakButton">脆弱条件追加</button>
         </div>
-
         <div class="condition-group">
           <select id="idDefenseSelect">
-            <option value="防御">ガード</option>
-            <option value="回避">回避</option>
-            <option value="反撃">反撃</option>
-            <option value="M防御">マッチ可能ガード</option>
-            <option value="M反撃">マッチ可能反撃</option>
+            <option value="防御">ガード</option><option value="回避">回避</option><option value="反撃">反撃</option><option value="M防御">マッチ可能ガード</option><option value="M反撃">マッチ可能反撃</option>
           </select>
           <button class="condition-button" id="idDefenseButton">条件追加</button>
         </div>
-
         <div class="condition-group">
           <select id="idSinSelect">
-            <option value="憤怒">憤怒</option>
-            <option value="色欲">色欲</option>
-            <option value="怠惰">怠惰</option>
-            <option value="暴食">暴食</option>
-            <option value="憂鬱">憂鬱</option>
-            <option value="傲慢">傲慢</option>
-            <option value="嫉妬">嫉妬</option>
+            <option value="憤怒">憤怒</option><option value="色欲">色欲</option><option value="怠惰">怠惰</option><option value="暴食">暴食</option><option value="憂鬱">憂鬱</option><option value="傲慢">傲慢</option><option value="嫉妬">嫉妬</option>
           </select>
           <button class="condition-button" id="idSinButton">属性条件追加</button>
         </div>
-
         <div class="condition-group">
           <select id="idEffectSelect">
-            <option value="火傷">火傷</option>
-            <option value="出血">出血</option>
-            <option value="振動">振動</option>
-            <option value="破裂">破裂</option>
-            <option value="沈潜">沈潜</option>
-            <option value="呼吸">呼吸</option>
-            <option value="充電">充電</option>
+            <option value="火傷">火傷</option><option value="出血">出血</option><option value="振動">振動</option><option value="破裂">破裂</option><option value="沈潜">沈潜</option><option value="呼吸">呼吸</option><option value="充電">充電</option>
           </select>
           <button class="condition-button" id="idEffectButton">状態条件追加</button>
         </div>
@@ -276,15 +95,8 @@
     </div>
 
     <div class="section-title">論理式</div>
-    <div id="identityExpression" class="expression-box">
-      <span class="empty-expression">ここに条件が入ります</span>
-    </div>
-
-    <div class="action-row">
-      <button id="identitySearchButton" class="search-button">検索</button>
-      <button id="identityResetButton" class="reset-button">リセット</button>
-      <span id="identityCount" class="result-count"></span>
-    </div>
+    <div id="identityExpression" class="expression-box"><span class="empty-expression">ここに条件が入ります</span></div>
+    <div class="action-row"><button id="identitySearchButton" class="search-button">検索</button><button id="identityResetButton" class="reset-button">リセット</button><span id="identityCount" class="result-count"></span></div>
     <div id="identityError" class="error"></div>
     <div id="identityResults"></div>
   </section>
@@ -293,11 +105,7 @@
     <div class="control-section">
       <div class="section-title">論理演算子</div>
       <div class="button-row">
-        <button class="op-button" data-mode="ego" data-token="NOT">¬</button>
-        <button class="op-button" data-mode="ego" data-token="AND">∧</button>
-        <button class="op-button" data-mode="ego" data-token="OR">∨</button>
-        <button class="op-button" data-mode="ego" data-token="LPAREN">(</button>
-        <button class="op-button" data-mode="ego" data-token="RPAREN">)</button>
+        <button class="op-button" data-mode="ego" data-token="NOT">¬</button><button class="op-button" data-mode="ego" data-token="AND">∧</button><button class="op-button" data-mode="ego" data-token="OR">∨</button><button class="op-button" data-mode="ego" data-token="LPAREN">(</button><button class="op-button" data-mode="ego" data-token="RPAREN">)</button>
       </div>
     </div>
 
@@ -305,427 +113,166 @@
       <div class="section-title">EGOの条件</div>
       <div class="button-row">
         <div class="condition-group">
-          <select id="egoRankSelect">
-            <option value="1">ZAYIN</option>
-            <option value="2">TETH</option>
-            <option value="3">HE</option>
-            <option value="4">WAW</option>
-            <option value="5">ALEPH</option>
-          </select>
+          <select id="egoRankSelect"><option value="1">ZAYIN</option><option value="2">TETH</option><option value="3">HE</option><option value="4">WAW</option><option value="5">ALEPH</option></select>
           <button class="condition-button" id="egoRankButton">ランク追加</button>
         </div>
-
         <div class="condition-group">
-          <select id="egoCostSinSelect">
-            <option value="憤怒">憤怒</option>
-            <option value="色欲">色欲</option>
-            <option value="怠惰">怠惰</option>
-            <option value="暴食">暴食</option>
-            <option value="憂鬱">憂鬱</option>
-            <option value="傲慢">傲慢</option>
-            <option value="嫉妬">嫉妬</option>
-          </select>
-          <span>消費</span>
-          <input id="egoCostValue" type="number" min="0" step="1" value="0">
-          <select id="egoCostOp">
-            <option value="<=">以下</option>
-            <option value="<">より少ない</option>
-            <option value="=">に等しい</option>
-            <option value=">">より多い</option>
-            <option value=">=">以上</option>
-          </select>
+          <select id="egoCostSinSelect"><option value="憤怒">憤怒</option><option value="色欲">色欲</option><option value="怠惰">怠惰</option><option value="暴食">暴食</option><option value="憂鬱">憂鬱</option><option value="傲慢">傲慢</option><option value="嫉妬">嫉妬</option></select>
+          <span>消費</span><input id="egoCostValue" type="number" min="0" step="1" value="0">
+          <select id="egoCostOp"><option value="<=">以下</option><option value="<">より少ない</option><option value="=">に等しい</option><option value=">">より多い</option><option value=">=">以上</option></select>
           <button class="condition-button" id="egoCostButton">条件追加</button>
         </div>
-
         <div class="condition-group">
-          <select id="egoResistSinSelect">
-            <option value="憤怒">憤怒</option>
-            <option value="色欲">色欲</option>
-            <option value="怠惰">怠惰</option>
-            <option value="暴食">暴食</option>
-            <option value="憂鬱">憂鬱</option>
-            <option value="傲慢">傲慢</option>
-            <option value="嫉妬">嫉妬</option>
-          </select>
-          <span>耐性が</span>
-          <select id="egoResistValue">
-            <option value="0.5">0.5</option>
-            <option value="0.75">0.75</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
-          <select id="egoResistOp">
-            <option value="<=">以下</option>
-            <option value="<">より少ない</option>
-            <option value="=">に等しい</option>
-            <option value=">">より多い</option>
-            <option value=">=">以上</option>
-          </select>
+          <select id="egoResistSinSelect"><option value="憤怒">憤怒</option><option value="色欲">色欲</option><option value="怠惰">怠惰</option><option value="暴食">暴食</option><option value="憂鬱">憂鬱</option><option value="傲慢">傲慢</option><option value="嫉妬">嫉妬</option></select>
+          <span>耐性が</span><select id="egoResistValue"><option value="0.5">0.5</option><option value="0.75">0.75</option><option value="1">1</option><option value="2">2</option></select>
+          <select id="egoResistOp"><option value="<=">以下</option><option value="<">より少ない</option><option value="=">に等しい</option><option value=">">より多い</option><option value=">=">以上</option></select>
           <button class="condition-button" id="egoResistButton">条件追加</button>
         </div>
       </div>
     </div>
 
     <div class="section-title">論理式</div>
-    <div id="egoExpression" class="expression-box">
-      <span class="empty-expression">ここに条件が入ります</span>
-    </div>
-
-    <div class="action-row">
-      <button id="egoSearchButton" class="search-button">検索</button>
-      <button id="egoResetButton" class="reset-button">リセット</button>
-      <span id="egoCount" class="result-count"></span>
-    </div>
+    <div id="egoExpression" class="expression-box"><span class="empty-expression">ここに条件が入ります</span></div>
+    <div class="action-row"><button id="egoSearchButton" class="search-button">検索</button><button id="egoResetButton" class="reset-button">リセット</button><span id="egoCount" class="result-count"></span></div>
     <div id="egoError" class="error"></div>
     <div id="egoResults"></div>
   </section>
 </div>
 
 <script>
-const IDENTITY_DATA = [{"id": 1001, "name1": "LCB 囚人", "name2": "イサン", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 1002, "name1": "南部セブン協会 6課", "name2": "イサン", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 1003, "name1": "剣契 殺手", "name2": "イサン", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 1004, "name1": "開花 E.G.O:: 壇香梅", "name2": "イサン", "season": "SEASON 2", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 1005, "name1": "奥歯事務所 フィクサー", "name2": "イサン", "season": "SEASON 2 [EVENT]", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 1006, "name1": "W社 3級 整理要員", "name2": "イサン", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 1007, "name1": "ピークォド号 1等航海士", "name2": "イサン", "season": "SEASON 3", "rank": 2, "time": 3, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 1008, "name1": "南部ディエーチ協会 4課", "name2": "イサン", "season": "恒常", "rank": 2, "time": 3, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 1009, "name1": "薬指点描派 スチューデント", "name2": "イサン", "season": "恒常", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 1, "振動": 1, "破裂": 1, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 1010, "name1": "ロボトミーE.G.O:: 厳粛な哀悼", "name2": "イサン", "season": "WALPURGISNACHT-IV", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 1011, "name1": "LCE E.G.O:: 提灯", "name2": "イサン", "season": "SEASON 5 [EVENT]", "rank": 2, "time": 5, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 1012, "name1": "南部リウ協会 3課", "name2": "イサン", "season": "恒常", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 1013, "name1": "N社E.G.O:: 凶弾", "name2": "イサン", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 1014, "name1": "黒獣 - 午 筆頭", "name2": "イサン", "season": "SEASON 6 [EVENT]", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 1015, "name1": "蜘蛛の巣 人差し指の親方", "name2": "イサン", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 2, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 1, "充電": 0}, {"id": 1016, "name1": "LCE E.G.O:: 次元裂き", "name2": "イサン", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 2001, "name1": "LCB 囚人", "name2": "ファウスト", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 2002, "name1": "W社 2級 整理要員", "name2": "ファウスト", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 2003, "name1": "生き残った ロボトミー職員", "name2": "ファウスト", "season": "SEASON 1", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 2004, "name1": "握る者", "name2": "ファウスト", "season": "SEASON 1", "rank": 3, "time": 1, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 2005, "name1": "南部ツヴァイ協会 4課", "name2": "ファウスト", "season": "恒常", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 2006, "name1": "南部セブン協会 4課", "name2": "ファウスト", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 2007, "name1": "ロボトミーE.G.O:: 後悔", "name2": "ファウスト", "season": "WALPURGISNACHT-I", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 2, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 2008, "name1": "剣契 殺手", "name2": "ファウスト", "season": "SEASON 3 [EVENT]", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 2009, "name1": "ワザリング・ハイツ バトラー", "name2": "ファウスト", "season": "SEASON 4", "rank": 2, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 2010, "name1": "マルチクラック事務所 代表", "name2": "ファウスト", "season": "SEASON 4 [EVENT]", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 2011, "name1": "LCE E.G.O:: 紅炎殺", "name2": "ファウスト", "season": "SEASON 5 [EVENT]", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 2012, "name1": "黒獣 - 卯 筆頭", "name2": "ファウスト", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 2013, "name1": "東部シ協会 3課", "name2": "ファウスト", "season": "恒常", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 2014, "name1": "人差し指遂行者: 【紙片】", "name2": "ファウスト", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 1, "充電": 0}, {"id": 2015, "name1": "蜘蛛の巣 薬指の子方", "name2": "ファウスト", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 2016, "name1": "夜明事務所 フィクサー", "name2": "ファウスト", "season": "WALPURGISNACHT IX", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 2, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 3001, "name1": "LCB 囚人", "name2": "ドンキホーテ", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 3002, "name1": "W社 3級 整理要員", "name2": "ドンキホーテ", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 3003, "name1": "南部シ協会 5課", "name2": "ドンキホーテ", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 3004, "name1": "N社 中鎚", "name2": "ドンキホーテ", "season": "SEASON 1", "rank": 2, "time": 1, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 3005, "name1": "南部センク協会 5課 部長", "name2": "ドンキホーテ", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 3006, "name1": "中指 末妹", "name2": "ドンキホーテ", "season": "SEASON 3", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 3007, "name1": "ロボトミーE.G.O:: 提灯", "name2": "ドンキホーテ", "season": "WALPURGISNACHT-II", "rank": 2, "time": 3, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 3008, "name1": "剣契 殺手", "name2": "ドンキホーテ", "season": "SEASON 3 [EVENT]", "rank": 2, "time": 3, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 3009, "name1": "T社 3級 徴収職職員", "name2": "ドンキホーテ", "season": "恒常", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 3010, "name1": "ラ・マンチャランド 室長", "name2": "ドンキホーテ", "season": "SEASON 5", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 3011, "name1": "東部センク協会 3課", "name2": "ドンキホーテ", "season": "恒常", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 3012, "name1": "ロボトミーE.G.O:: 愛と憎悪の名の下に", "name2": "ドンキホーテ", "season": "WALPURGISNACHT-VI", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 1, "呼吸": 0, "充電": 1}, {"id": 3013, "name1": "黒獣 - 未", "name2": "ドンキホーテ", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 3014, "name1": "人差し指代行者 - 開花E.G.O::　代行", "name2": "ドンキホーテ", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 1, "充電": 0}, {"id": 4001, "name1": "LCB 囚人", "name2": "良秀", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 4002, "name1": "南部セブン協会 6課", "name2": "良秀", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 4003, "name1": "黒雲会 若衆", "name2": "良秀", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 4004, "name1": "りょ・ミ・パ 厨房長", "name2": "良秀", "season": "SEASON 1 [EVENT]", "rank": 3, "time": 1, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 4005, "name1": "W社 3級 整理要員", "name2": "良秀", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 4006, "name1": "LCCB 係長", "name2": "良秀", "season": "SEASON 3", "rank": 2, "time": 3, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 1, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 4007, "name1": "南部リウ協会 4課", "name2": "良秀", "season": "恒常", "rank": 2, "time": 3, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 4008, "name1": "エドガー家 チーフバトラー", "name2": "良秀", "season": "SEASON 4", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 4009, "name1": "20区 ユロージヴィ", "name2": "良秀", "season": "SEASON 4 [EVENT]", "rank": 2, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 4010, "name1": "ロボトミーE.G.O:: 赤眼・懺悔", "name2": "良秀", "season": "WALPURGISNACHT-IV", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 4011, "name1": "黒獣 - 卯", "name2": "良秀", "season": "SEASON 5 [EVENT]", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 4012, "name1": "N社E.G.O:: 軽蔑、畏敬", "name2": "良秀", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 2, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 4013, "name1": "鴻園の放浪武者", "name2": "良秀", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 4014, "name1": "ロボトミーE.G.O:: 残香・寂しさ", "name2": "良秀", "season": "WALPURGISNACHT-VIII", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 4015, "name1": "蜘蛛の巣の刀", "name2": "良秀", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 4016, "name1": "オートクチュール:: ル・ノワール シューズフロア", "name2": "良秀", "season": "SEASON 8", "rank": 3, "time": 8, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 5001, "name1": "LCB 囚人", "name2": "ムルソー", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 5002, "name1": "南部リウ協会 6課", "name2": "ムルソー", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 5003, "name1": "W社 2級 整理要員", "name2": "ムルソー", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 5004, "name1": "N社 大鎚", "name2": "ムルソー", "season": "SEASON 1", "rank": 3, "time": 1, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 5005, "name1": "バラのスパナ工房 フィクサー", "name2": "ムルソー", "season": "SEASON 2", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 5006, "name1": "R社第4群 サイチーム", "name2": "ムルソー", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 5007, "name1": "中指 末弟", "name2": "ムルソー", "season": "SEASON 3", "rank": 2, "time": 3, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 5008, "name1": "剣契 頭目", "name2": "ムルソー", "season": "SEASON 3 [EVENT]", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 2, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 5009, "name1": "デッドラビッツ ボス", "name2": "ムルソー", "season": "SEASON 4", "rank": 2, "time": 4, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 5010, "name1": "南部ディエーチ協会 4課 部長", "name2": "ムルソー", "season": "恒常", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 5011, "name1": "西部センク協会 3課", "name2": "ムルソー", "season": "SEASON 5", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 5012, "name1": "東部親指 カポIIII", "name2": "ムルソー", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 5013, "name1": "ラ・マンチャランドの王子", "name2": "ムルソー", "season": "SEASON 6 [EVENT]", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 5014, "name1": "ロボトミーE.G.O:: ホーネット【変調】", "name2": "ムルソー", "season": "WALPURGISNACHT-VIII", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 5015, "name1": "薬指 野獣派 スチューデント", "name2": "ムルソー", "season": "SEASON 7 [EVENT]", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 6001, "name1": "LCB 囚人", "name2": "ホンル", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 6002, "name1": "黒雲会 若衆", "name2": "ホンル", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 6003, "name1": "ぽんぽん派 ボス", "name2": "ホンル", "season": "SEASON 1", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 6004, "name1": "南部リウ協会 5課", "name2": "ホンル", "season": "恒常", "rank": 2, "time": 1, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 6005, "name1": "K社 3級 摘出職職員", "name2": "ホンル", "season": "SEASON 2", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 6006, "name1": "W社 2級 整理要員", "name2": "ホンル", "season": "恒常", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 6007, "name1": "鈎事務所 フィクサー", "name2": "ホンル", "season": "WALPURGISNACHT-I", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 6008, "name1": "南部ディエーチ協会 4課", "name2": "ホンル", "season": "恒常", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 6009, "name1": "20区 ユロージヴィ", "name2": "ホンル", "season": "SEASON 4 [EVENT]", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 6010, "name1": "牙狩事務所 フィクサー", "name2": "ホンル", "season": "SEASON 5", "rank": 2, "time": 5, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 6011, "name1": "終止符事務所 代表", "name2": "ホンル", "season": "WALPURGISNACHT-V", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 2, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 6012, "name1": "R社第4群 トナカイチーム", "name2": "ホンル", "season": "恒常", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 1}, {"id": 6013, "name1": "鴻園の君主", "name2": "ホンル", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 6014, "name1": "蜘蛛の巣 薬指の親方", "name2": "ホンル", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 1, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 6015, "name1": "S社 チュノックン", "name2": "ホンル", "season": "SEASON 7 [EVENT]", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 6016, "name1": "東部センク協会 3課", "name2": "ホンル", "season": "恒常", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 7001, "name1": "LCB 囚人", "name2": "ヒースクリフ", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 7002, "name1": "南部シ協会 5課", "name2": "ヒースクリフ", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 7003, "name1": "R社第4群 ウサギチーム", "name2": "ヒースクリフ", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 7004, "name1": "N社 小鎚", "name2": "ヒースクリフ", "season": "SEASON 1", "rank": 2, "time": 1, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 7005, "name1": "ロボトミーE.G.O:: 狐雨", "name2": "ヒースクリフ", "season": "SEASON 2", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 2, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 7006, "name1": "南部セブン協会 4課", "name2": "ヒースクリフ", "season": "恒常", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 7007, "name1": "ピークォド号 銛使い", "name2": "ヒースクリフ", "season": "SEASON 3", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 2, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 7008, "name1": "南部ウーフィ協会 3課", "name2": "ヒースクリフ", "season": "恒常", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 7009, "name1": "マルチクラック事務所 フィクサー", "name2": "ヒースクリフ", "season": "SEASON 4 [EVENT]", "rank": 2, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 7010, "name1": "ワイルドハント", "name2": "ヒースクリフ", "season": "SEASON 4", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 7011, "name1": "終止符事務所 フィクサー", "name2": "ヒースクリフ", "season": "WALPURGISNACHT-V", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 7012, "name1": "黒雲会 若衆", "name2": "ヒースクリフ", "season": "SEASON 5 [EVENT]", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 7013, "name1": "W社 4級 整理要員 - CCA", "name2": "ヒースクリフ", "season": "SEASON 6 [EVENT]", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 7014, "name1": "黒獣 - 酉 筆頭", "name2": "ヒースクリフ", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 1, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 7015, "name1": "中指 末兄", "name2": "ヒースクリフ", "season": "SEASON 7 [EVENT]", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 1, "出血": 1, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 7016, "name1": "蜘蛛の巣 親指の子方", "name2": "ヒースクリフ", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 2, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 8001, "name1": "LCB 囚人", "name2": "イシュメール", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 8002, "name1": "R社第4群 トナカイチーム", "name2": "イシュメール", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 1}, {"id": 8003, "name1": "南部シ協会 5課", "name2": "イシュメール", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 8004, "name1": "LCCB 係長", "name2": "イシュメール", "season": "SEASON 1", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 8005, "name1": "ロボトミーE.G.O:: たぷつき", "name2": "イシュメール", "season": "SEASON 2", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 8006, "name1": "南部リウ協会 4課", "name2": "イシュメール", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 8007, "name1": "奥歯ボートセンター フィクサー", "name2": "イシュメール", "season": "SEASON 2 [EVENT]", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 8008, "name1": "ピークォド号 船長", "name2": "イシュメール", "season": "SEASON 3", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 1, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 8009, "name1": "エドガー家 バトラー", "name2": "イシュメール", "season": "SEASON 4", "rank": 2, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 1, "充電": 0}, {"id": 8010, "name1": "西部ツヴァイ協会 3課", "name2": "イシュメール", "season": "恒常", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 8011, "name1": "黒雲会 副組長", "name2": "イシュメール", "season": "SEASON 5 [EVENT]", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 8012, "name1": "家主候補", "name2": "イシュメール", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 8013, "name1": "定事務所 代表", "name2": "イシュメール", "season": "WALPURGISNACHT-VII", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 2, "嫉妬": 2, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 8014, "name1": "蜘蛛の巣 中指の子方", "name2": "イシュメール", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 1, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 8015, "name1": "LCD 現場推理チーム", "name2": "イシュメール", "season": "SEASON 7 [EVENT]", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 8016, "name1": "オートクチュール:: ル・ルージュ ブティーク", "name2": "イシュメール", "season": "SEASON 8", "rank": 3, "time": 8, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 9001, "name1": "LCB 囚人", "name2": "ロージャ", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 9002, "name1": "黒雲会 若衆", "name2": "ロージャ", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 9003, "name1": "LCCB 係長", "name2": "ロージャ", "season": "SEASON 1", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 9004, "name1": "N社 中鎚", "name2": "ロージャ", "season": "SEASON 1", "rank": 2, "time": 1, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 9005, "name1": "バラのスパナ工房 代表", "name2": "ロージャ", "season": "SEASON 2", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 2, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 9006, "name1": "南部ツヴァイ協会 5課", "name2": "ロージャ", "season": "恒常", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 9007, "name1": "南部ディエーチ協会 4課", "name2": "ロージャ", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 9008, "name1": "南部リウ協会 4課 部長", "name2": "ロージャ", "season": "恒常", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 9009, "name1": "T社 2級 徴収職職員", "name2": "ロージャ", "season": "恒常", "rank": 2, "time": 4, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 9010, "name1": "北部ヂェーヴィチ協会 3課", "name2": "ロージャ", "season": "恒常", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 9011, "name1": "ラ・マンチャランドの姫", "name2": "ロージャ", "season": "SEASON 5", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 9012, "name1": "黒獣 - 巳", "name2": "ロージャ", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 9013, "name1": "ロボトミーE.G.O:: 涙で研ぎ澄まされた剣", "name2": "ロージャ", "season": "WALPURGISNACHT-VI", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 9014, "name1": "R社第4群 トナカイチーム", "name2": "ロージャ", "season": "恒常", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 1}, {"id": 9015, "name1": "薬指 野獣派 ドーセント", "name2": "ロージャ", "season": "SEASON 7 [EVENT]", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 9016, "name1": "蜘蛛の巣 親指の親方", "name2": "ロージャ", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 2, "怠惰": 1, "暴食": 1, "憂鬱": 2, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 10001, "name1": "LCB 囚人", "name2": "シンクレア", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10002, "name1": "剣契 殺手", "name2": "シンクレア", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 10003, "name1": "南部ツヴァイ協会 6課", "name2": "シンクレア", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10004, "name1": "マリアッチ ボス", "name2": "シンクレア", "season": "SEASON 1", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 1, "充電": 0}, {"id": 10005, "name1": "握らんとする者", "name2": "シンクレア", "season": "SEASON 1", "rank": 3, "time": 1, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 2, "嫉妬": 0, "火傷": 1, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10006, "name1": "ロボトミーE.G.O:: 紅籍", "name2": "シンクレア", "season": "SEASON 2", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10007, "name1": "奥歯ボートセンター フィクサー", "name2": "シンクレア", "season": "SEASON 2 [EVENT]", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10008, "name1": "南部センク協会 4課 部長", "name2": "シンクレア", "season": "恒常", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 10009, "name1": "夜明事務所 フィクサー", "name2": "シンクレア", "season": "WALPURGISNACHT-III", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10010, "name1": "西部ツヴァイ協会 3課", "name2": "シンクレア", "season": "SEASON 5", "rank": 2, "time": 5, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10011, "name1": "北部ヂェーヴィチ協会 3課", "name2": "シンクレア", "season": "恒常", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10012, "name1": "中指 末弟", "name2": "シンクレア", "season": "恒常", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10013, "name1": "東部親指 ソルダートII", "name2": "シンクレア", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10014, "name1": "黒獣 - 酉", "name2": "シンクレア", "season": "SEASON 6 [EVENT]", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 10015, "name1": "蜘蛛の巣 小指の子方", "name2": "シンクレア", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 11001, "name1": "LCB 囚人", "name2": "ウーティス", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 11002, "name1": "剣契 殺手", "name2": "ウーティス", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 11003, "name1": "G社 部長", "name2": "ウーティス", "season": "SEASON 1", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 11004, "name1": "南部セブン協会 6課部長", "name2": "ウーティス", "season": "恒常", "rank": 3, "time": 1, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 11005, "name1": "奥歯事務所 フィクサー", "name2": "ウーティス", "season": "SEASON 2 [EVENT]", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 11006, "name1": "南部センク協会 4課", "name2": "ウーティス", "season": "恒常", "rank": 2, "time": 3, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 0.5, "打撃耐性": 1, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 11007, "name1": "ロボトミーE.G.O:: 魔弾", "name2": "ウーティス", "season": "WALPURGISNACHT-II", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 11008, "name1": "ワザリング・ハイツ チーフバトラー", "name2": "ウーティス", "season": "SEASON 4", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 11009, "name1": "薬指点描派 スチューデント", "name2": "ウーティス", "season": "恒常", "rank": 2, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 1, "振動": 1, "破裂": 1, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 11010, "name1": "W社 3級 整理要員チーフ", "name2": "ウーティス", "season": "恒常", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 11011, "name1": "ラ・マンチャランド 理髪師", "name2": "ウーティス", "season": "SEASON 5", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 11012, "name1": "黒獣 - 卯", "name2": "ウーティス", "season": "SEASON 5 [EVENT]", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 11013, "name1": "T社3級 強制徴収職 職員", "name2": "ウーティス", "season": "SEASON 6 [EVENT]", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 11014, "name1": "LCA ウアジェト先鋒三隊隊長", "name2": "ウーティス", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 11015, "name1": "蜘蛛の巣 中指の親方", "name2": "ウーティス", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 1, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 1, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12001, "name1": "LCB 囚人", "name2": "グレゴール", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12002, "name1": "南部リウ協会 6課", "name2": "グレゴール", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12003, "name1": "G社 課長代理", "name2": "グレゴール", "season": "SEASON 1", "rank": 3, "time": 0, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12004, "name1": "りょ・ミ・パ 助手", "name2": "グレゴール", "season": "SEASON 1 [EVENT]", "rank": 2, "time": 1, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12005, "name1": "バラのスパナ工房 フィクサー", "name2": "グレゴール", "season": "SEASON 2", "rank": 2, "time": 2, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 1, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 12006, "name1": "南部ツヴァイ協会 4課", "name2": "グレゴール", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃耐性": 2, "貫通耐性": 1, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12007, "name1": "双鉤海賊団 副船長", "name2": "グレゴール", "season": "SEASON 3", "rank": 3, "time": 3, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 12008, "name1": "黒雲会 副組長", "name2": "グレゴール", "season": "SEASON 3 [EVENT]", "rank": 2, "time": 3, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12009, "name1": "エドガー家 継承者", "name2": "グレゴール", "season": "SEASON 4", "rank": 3, "time": 4, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 1, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 12010, "name1": "ラ・マンチャランド 神父", "name2": "グレゴール", "season": "SEASON 5", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 2, "打撃耐性": 0.5, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12011, "name1": "炎拳事務所 生存者", "name2": "グレゴール", "season": "SEASON 5", "rank": 3, "time": 5, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 2, "打撃耐性": 1, "斬撃": 0, "貫通": 0, "打撃": 1, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12012, "name1": "黒獣 - 巳", "name2": "グレゴール", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 1, "充電": 0}, {"id": 12013, "name1": "夜の錐 カピターノ", "name2": "グレゴール", "season": "WALPURGISNACHT-VII", "rank": 3, "time": 6, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 0, "出血": 1, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}, {"id": 12014, "name1": "ロボトミーE.G.O:: ランプ", "name2": "グレゴール", "season": "SEASON 7", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 1, "貫通耐性": 0.5, "打撃耐性": 2, "斬撃": 0, "貫通": 1, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 1, "M反撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 0, "破裂": 0, "沈潜": 1, "呼吸": 0, "充電": 0}, {"id": 12015, "name1": "LCE E.G.O:: AEDD", "name2": "グレゴール", "season": "SEASON 7 [EVENT]", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 1, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "火傷": 0, "出血": 0, "振動": 0, "破裂": 1, "沈潜": 0, "呼吸": 0, "充電": 1}, {"id": 12016, "name1": "夜明事務所 代表", "name2": "グレゴール", "season": "WALPURGISNACHT IX", "rank": 3, "time": 7, "maxState": 4, "斬撃耐性": 0.5, "貫通耐性": 1, "打撃耐性": 2, "斬撃": 1, "貫通": 0, "打撃": 0, "防御": 0, "回避": 0, "反撃": 0, "M防御": 0, "M反撃": 1, "憤怒": 1, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "火傷": 1, "出血": 0, "振動": 1, "破裂": 0, "沈潜": 0, "呼吸": 0, "充電": 0}];
-const EGO_DATA = [{"id": 13001, "name1": "烏瞰刀", "name2": "イサン", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 3, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 0.75, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 13002, "name1": "4本目のマッチの火", "name2": "イサン", "season": "SEASON 1", "rank": 2, "time": 1, "maxState": 5, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 5, "色欲": 0, "怠惰": 1, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 13003, "name1": "願いの石", "name2": "イサン", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 4, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 0.5, "暴食耐性": 2, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 13004, "name1": "次元裂き", "name2": "イサン", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 3, "暴食": 3, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 2}, {"id": 13005, "name1": "狐雨", "name2": "イサン", "season": "SEASON 2", "rank": 4, "time": 2, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 4, "暴食": 2, "憂鬱": 2, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 2, "怠惰耐性": 0.75, "暴食耐性": 0.5, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 13006, "name1": "過ぎし日", "name2": "イサン", "season": "SEASON 4", "rank": 1, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 3, "暴食": 0, "憂鬱": 3, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 0.75, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 13007, "name1": "凶弾", "name2": "イサン", "season": "SEASON 5", "rank": 3, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 2, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 6, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 0.5, "傲慢耐性": 0.75, "嫉妬耐性": 2}, {"id": 13008, "name1": "三千大世界", "name2": "イサン", "season": "SEASON 7", "rank": 4, "time": 7, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 4, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 2, "傲慢": 2, "嫉妬": 4, "憤怒耐性": 0.5, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 0.5, "傲慢耐性": 0.75, "嫉妬耐性": 1}, {"id": 13009, "name1": "厳粛な哀悼", "name2": "イサン", "season": "WALPURGISNACHT IX", "rank": 3, "time": 7, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 4, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 0.75, "暴食耐性": 2, "憂鬱耐性": 0.5, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 14001, "name1": "表象放出機", "name2": "ファウスト", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 2, "憂鬱": 0, "傲慢": 4, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 1}, {"id": 14002, "name1": "水袋", "name2": "ファウスト", "season": "恒常", "rank": 3, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 4, "傲慢": 0, "嫉妬": 3, "憤怒耐性": 1, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 0.5, "傲慢耐性": 2, "嫉妬耐性": 2}, {"id": 14003, "name1": "呪いの釘", "name2": "ファウスト", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 6, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 0.5}, {"id": 14004, "name1": "電信柱", "name2": "ファウスト", "season": "恒常", "rank": 3, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 1, "色欲": 3, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 0.5}, {"id": 14005, "name1": "9章2節", "name2": "ファウスト", "season": "SEASON 3", "rank": 2, "time": 3, "maxState": 5, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 3, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 14006, "name1": "永続", "name2": "ファウスト", "season": "SEASON 4 [EVENT]", "rank": 4, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 2, "怠惰": 4, "暴食": 0, "憂鬱": 2, "傲慢": 3, "嫉妬": 0, "憤怒耐性": 0.75, "色欲耐性": 2, "怠惰耐性": 0.5, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 2}, {"id": 14007, "name1": "投げ縄", "name2": "ファウスト", "season": "SEASON 5", "rank": 2, "time": 5, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 3, "憂鬱": 0, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 0.5, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 14008, "name1": "胸痛", "name2": "ファウスト", "season": "SEASON 5", "rank": 3, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 5, "嫉妬": 0, "憤怒耐性": 0.75, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 1}, {"id": 14009, "name1": "指令：メルトダウン", "name2": "ファウスト", "season": "COLLABORATION-LIMITED", "rank": 3, "time": 6, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 5, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 0.75, "色欲耐性": 2, "怠惰耐性": 2, "暴食耐性": 0.5, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 14010, "name1": "紅炎殺", "name2": "ファウスト", "season": "SEASON 7 [EVENT]", "rank": 3, "time": 7, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 3, "色欲": 0, "怠惰": 2, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 2, "怠惰耐性": 0.75, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 15001, "name1": "ラ・サングレ・デ・サンチョ", "name2": "ドンキホーテ", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 15002, "name1": "水袋", "name2": "ドンキホーテ", "season": "SEASON 1", "rank": 3, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 4, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 0.5, "傲慢耐性": 2, "嫉妬耐性": 2}, {"id": 15003, "name1": "電信柱", "name2": "ドンキホーテ", "season": "恒常", "rank": 3, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 2, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 0.5}, {"id": 15004, "name1": "一生シチュー", "name2": "ドンキホーテ", "season": "SEASON 1 [EVENT]", "rank": 2, "time": 1, "maxState": 5, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 5, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 0.5, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 15005, "name1": "願いの石", "name2": "ドンキホーテ", "season": "恒常", "rank": 2, "time": 3, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 0, "怠惰": 2, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 0.5, "暴食耐性": 2, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 15006, "name1": "電気哀鳴", "name2": "ドンキホーテ", "season": "SEASON 4", "rank": 2, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 4, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 0.5}, {"id": 15007, "name1": "渇望-ミルカラ", "name2": "ドンキホーテ", "season": "SEASON 5", "rank": 4, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 5, "怠惰": 0, "暴食": 3, "憂鬱": 0, "傲慢": 2, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 0.5, "怠惰耐性": 2, "暴食耐性": 0.5, "憂鬱耐性": 2, "傲慢耐性": 0.75, "嫉妬耐性": 1}, {"id": 15008, "name1": "紅籍", "name2": "ドンキホーテ", "season": "SEASON 6", "rank": 3, "time": 6, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 5, "憂鬱": 2, "傲慢": 1, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 0.5}, {"id": 15009, "name1": "愛と憎悪の名の下に", "name2": "ドンキホーテ", "season": "WALPURGISNACHT-VI", "rank": 4, "time": 6, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 2, "傲慢": 2, "嫉妬": 6, "憤怒耐性": 0.5, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 0.75}, {"id": 15010, "name1": "私はチョキを出すね、そっちは？", "name2": "ドンキホーテ", "season": "SEASON 7", "rank": 1, "time": 7, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 5, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 0.75}, {"id": 16001, "name1": "森羅炎象", "name2": "良秀", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 2, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 16002, "name1": "4本目のマッチの火", "name2": "良秀", "season": "SEASON 1", "rank": 3, "time": 1, "maxState": 5, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 4, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 0.75}, {"id": 16003, "name1": "赤眼", "name2": "良秀", "season": "恒常", "rank": 2, "time": 2, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 2, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "憤怒耐性": 1, "色欲耐性": 0.5, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 16004, "name1": "赤眼(開)", "name2": "良秀", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 2, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 3, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 0.75, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 0.5}, {"id": 16005, "name1": "ソーダ", "name2": "良秀", "season": "SEASON 2 [EVENT]", "rank": 1, "time": 2, "maxState": 5, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 2, "憂鬱": 0, "傲慢": 2, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 0.75, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 16006, "name1": "盲目", "name2": "良秀", "season": "SEASON 3", "rank": 2, "time": 3, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 2, "傲慢": 2, "嫉妬": 2, "憤怒耐性": 2, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 1}, {"id": 16007, "name1": "軽蔑、畏敬", "name2": "良秀", "season": "SEASON 4", "rank": 4, "time": 4, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 3, "色欲": 4, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 4, "嫉妬": 3, "憤怒耐性": 0.5, "色欲耐性": 2, "怠惰耐性": 0.5, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 0.75, "嫉妬耐性": 1}, {"id": 16008, "name1": "胸痛", "name2": "良秀", "season": "SEASON 5 [EVENT]", "rank": 3, "time": 5, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 1, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 5, "嫉妬": 0, "憤怒耐性": 0.75, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 1}, {"id": 16009, "name1": "三千大世界", "name2": "良秀", "season": "SEASON 7", "rank": 4, "time": 7, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 4, "色欲": 4, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 4, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 0.75, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 2}, {"id": 17001, "name1": "他人の鎖", "name2": "ムルソー", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 1}, {"id": 17002, "name1": "ネジの外れた一撃", "name2": "ムルソー", "season": "SEASON 1", "rank": 2, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 2, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 2, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 0.5, "嫉妬耐性": 1}, {"id": 17003, "name1": "執行", "name2": "ムルソー", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 4, "暴食": 0, "憂鬱": 1, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 0.5, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 1}, {"id": 17004, "name1": "カポーテ", "name2": "ムルソー", "season": "SEASON 2", "rank": 3, "time": 2, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 1, "怠惰": 2, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 0.75, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 17005, "name1": "後悔", "name2": "ムルソー", "season": "WALPURGISNACHT-I", "rank": 2, "time": 2, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 3, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 0.5, "傲慢耐性": 2, "嫉妬耐性": 2}, {"id": 17006, "name1": "電気哀鳴", "name2": "ムルソー", "season": "SEASON 4", "rank": 2, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 4, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 0.5}, {"id": 17007, "name1": "渇望-ミルカラ", "name2": "ムルソー", "season": "SEASON 5", "rank": 4, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 4, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 3, "嫉妬": 4, "憤怒耐性": 1, "色欲耐性": 0.5, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 0.5}, {"id": 17008, "name1": "粉砕される過去", "name2": "ムルソー", "season": "SEASON 6 [EVENT]", "rank": 4, "time": 6, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 2, "怠惰": 6, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 0.5, "暴食耐性": 2, "憂鬱耐性": 0.5, "傲慢耐性": 1, "嫉妬耐性": 0.75}, {"id": 17009, "name1": "着影揮刀", "name2": "ムルソー", "season": "SEASON 7 [EVENT]", "rank": 3, "time": 7, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 4, "嫉妬": 1, "憤怒耐性": 1, "色欲耐性": 0.75, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 0.5, "嫉妬耐性": 1}, {"id": 18001, "name1": "虚幻境", "name2": "ホンル", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 5, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 0.75, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 18002, "name1": "桃色の欲望", "name2": "ホンル", "season": "SEASON 1", "rank": 2, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 4, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 2, "色欲耐性": 0.5, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 18003, "name1": "次元裂き", "name2": "ホンル", "season": "恒常", "rank": 3, "time": 1, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 3, "憂鬱": 0, "傲慢": 3, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 2}, {"id": 18004, "name1": "ソーダ", "name2": "ホンル", "season": "SEASON 2 [EVENT]", "rank": 2, "time": 2, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 3, "憂鬱": 2, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 0.5, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 18005, "name1": "沸き立つ腐食", "name2": "ホンル", "season": "SEASON 3", "rank": 3, "time": 3, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 6, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 0.5, "傲慢耐性": 1, "嫉妬耐性": 0.75}, {"id": 18006, "name1": "低いなきごえ", "name2": "ホンル", "season": "恒常", "rank": 2, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 3, "暴食": 0, "憂鬱": 3, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 0.5, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 18007, "name1": "投げ縄", "name2": "ホンル", "season": "SEASON 5", "rank": 2, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 4, "憂鬱": 0, "傲慢": 1, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 0.5, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 18008, "name1": "汚血泣涙", "name2": "ホンル", "season": "SEASON 6", "rank": 4, "time": 6, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 5, "憂鬱": 1, "傲慢": 0, "嫉妬": 1, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 0.5, "憂鬱耐性": 0.5, "傲慢耐性": 1, "嫉妬耐性": 0.75}, {"id": 18009, "name1": "寧ろ吾をなさん", "name2": "ホンル", "season": "COLLABORATION-LIMITED", "rank": 3, "time": 6, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 0, "憂鬱": 2, "傲慢": 4, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 0.75, "傲慢耐性": 0.5, "嫉妬耐性": 1}, {"id": 19001, "name1": "死体袋", "name2": "ヒースクリフ", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 0.75}, {"id": 19002, "name1": "電信柱", "name2": "ヒースクリフ", "season": "SEASON 1", "rank": 3, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 3, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 3, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 0.5}, {"id": 19003, "name1": "AEDD", "name2": "ヒースクリフ", "season": "SEASON 2", "rank": 2, "time": 2, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 3, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 0.5, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 19004, "name1": "空即是色", "name2": "ヒースクリフ", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 2, "怠惰": 2, "暴食": 0, "憂鬱": 2, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 0.5, "怠惰耐性": 0.75, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 19005, "name1": "ホリデイ", "name2": "ヒースクリフ", "season": "SEASON 3 [EVENT]", "rank": 1, "time": 3, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 3, "憂鬱": 0, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 0.75, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 19006, "name1": "拘束", "name2": "ヒースクリフ", "season": "SEASON 4", "rank": 4, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 4, "傲慢": 2, "嫉妬": 3, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 0.5, "傲慢耐性": 0.5, "嫉妬耐性": 0.75}, {"id": 19007, "name1": "凶弾", "name2": "ヒースクリフ", "season": "恒常", "rank": 2, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 3, "嫉妬": 2, "憤怒耐性": 2, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 1}, {"id": 19008, "name1": "偏った慣性", "name2": "ヒースクリフ", "season": "恒常", "rank": 3, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 2, "暴食": 0, "憂鬱": 1, "傲慢": 2, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 0.5, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 2, "嫉妬耐性": 0.75}, {"id": 19009, "name1": "転入届", "name2": "ヒースクリフ", "season": "SEASON 7", "rank": 2, "time": 7, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 0, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 3, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 0.5}, {"id": 20001, "name1": "銛穿ち", "name2": "イシュメール", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 2, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 0.75, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 20002, "name1": "桃色の欲望", "name2": "イシュメール", "season": "SEASON 1", "rank": 2, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 1, "色欲": 4, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 0.5, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 20003, "name1": "紅炎殺", "name2": "イシュメール", "season": "恒常", "rank": 3, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 4, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "憤怒耐性": 0.5, "色欲耐性": 0.75, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 20004, "name1": "カポーテ", "name2": "イシュメール", "season": "SEASON 2", "rank": 2, "time": 2, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 2, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 20005, "name1": "盲目", "name2": "イシュメール", "season": "SEASON 3", "rank": 4, "time": 3, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 2, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 3, "傲慢": 3, "嫉妬": 3, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 0.75, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 0.5}, {"id": 20006, "name1": "羽ばたき", "name2": "イシュメール", "season": "WALPURGISNACHT-III", "rank": 3, "time": 4, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 3, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 0.5, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 2}, {"id": 20007, "name1": "過ぎし日", "name2": "イシュメール", "season": "恒常", "rank": 2, "time": 4, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 1, "暴食": 0, "憂鬱": 3, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 0.5, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 20008, "name1": "クリスマスの悪夢", "name2": "イシュメール", "season": "SEASON 5 [EVENT]", "rank": 3, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 4, "暴食": 1, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 2, "怠惰耐性": 0.5, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 1}, {"id": 20009, "name1": "蝍蛆殺", "name2": "イシュメール", "season": "SEASON 6", "rank": 1, "time": 6, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 2, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 0.75, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 20010, "name1": "海嘯の悲歌", "name2": "イシュメール", "season": "COLLABORATION-LIMITED", "rank": 3, "time": 6, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 4, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 0.5, "傲慢耐性": 0.75, "嫉妬耐性": 1}, {"id": 21001, "name1": "投げられたもの", "name2": "ロージャ", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 3, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 0.75, "嫉妬耐性": 2}, {"id": 21002, "name1": "4本目のマッチの火", "name2": "ロージャ", "season": "SEASON 1", "rank": 3, "time": 1, "maxState": 5, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 3, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 1, "憤怒耐性": 0.5, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 0.75}, {"id": 21003, "name1": "氷の脚", "name2": "ロージャ", "season": "SEASON 1", "rank": 2, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 5, "傲慢": 0, "嫉妬": 3, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 0.5, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 21004, "name1": "沸き立つ腐食", "name2": "ロージャ", "season": "SEASON 3", "rank": 2, "time": 3, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 2, "暴食": 0, "憂鬱": 2, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 0.5, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 21005, "name1": "執行", "name2": "ロージャ", "season": "恒常", "rank": 3, "time": 3, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 4, "暴食": 0, "憂鬱": 0, "傲慢": 3, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 0.75, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 1}, {"id": 21006, "name1": "血色の欲望", "name2": "ロージャ", "season": "WALPURGISNACHT-III", "rank": 4, "time": 4, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 1, "色欲": 3, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 3, "嫉妬": 3, "憤怒耐性": 0.75, "色欲耐性": 0.5, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 0.5}, {"id": 21007, "name1": "呪いの釘", "name2": "ロージャ", "season": "SEASON 5", "rank": 3, "time": 5, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 4, "憤怒耐性": 1, "色欲耐性": 0.75, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 0.5}, {"id": 21008, "name1": "指定裁判", "name2": "ロージャ", "season": "SEASON 5", "rank": 4, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 7, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 3, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 0.75, "憂鬱耐性": 2, "傲慢耐性": 0.5, "嫉妬耐性": 1}, {"id": 21009, "name1": "夕焼けの中へ", "name2": "ロージャ", "season": "SEASON 7 [EVENT]", "rank": 1, "time": 7, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 3, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 22001, "name1": "知識の木の枝", "name2": "シンクレア", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 3, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 0.75, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 22002, "name1": "迫り来る日", "name2": "シンクレア", "season": "SEASON 1", "rank": 2, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 3, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 22003, "name1": "一生シチュー", "name2": "シンクレア", "season": "SEASON 1 [EVENT]", "rank": 2, "time": 1, "maxState": 5, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 3, "色欲": 2, "怠惰": 0, "暴食": 1, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 0.5, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 22004, "name1": "提灯", "name2": "シンクレア", "season": "恒常", "rank": 3, "time": 2, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 4, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 0.5, "憂鬱耐性": 0.75, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 22005, "name1": "9章2節", "name2": "シンクレア", "season": "SEASON 3", "rank": 3, "time": 3, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 2, "色欲": 5, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 1, "憤怒耐性": 0.5, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 22006, "name1": "低いなきごえ", "name2": "シンクレア", "season": "恒常", "rank": 1, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 2, "暴食": 0, "憂鬱": 3, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 0.75, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 22007, "name1": "呪いの釘", "name2": "シンクレア", "season": "SEASON 5", "rank": 2, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 2, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 0.5}, {"id": 22008, "name1": "汚血泣涙", "name2": "シンクレア", "season": "SEASON 6", "rank": 4, "time": 6, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 6, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 0.5, "憂鬱耐性": 0.5, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 22009, "name1": "ハーモニー", "name2": "シンクレア", "season": "WALPURGISNACHT-VIII", "rank": 3, "time": 7, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 3, "色欲": 2, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 1, "嫉妬": 1, "憤怒耐性": 0.5, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 23001, "name1": "ト・パソス・マソス", "name2": "ウーティス", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 2, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 2}, {"id": 23002, "name1": "黒い枝", "name2": "ウーティス", "season": "SEASON 1", "rank": 3, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 3, "憂鬱": 1, "傲慢": 4, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 0.5, "憂鬱耐性": 0.75, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 23003, "name1": "空即是色", "name2": "ウーティス", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 2, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 0.5, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 23004, "name1": "狐雨", "name2": "ウーティス", "season": "SEASON 2", "rank": 2, "time": 2, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 2, "暴食": 2, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 2, "怠惰耐性": 0.5, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 23005, "name1": "ホリデイ", "name2": "ウーティス", "season": "SEASON 3 [EVENT]", "rank": 3, "time": 3, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 2, "怠惰": 1, "暴食": 0, "憂鬱": 0, "傲慢": 3, "嫉妬": 2, "憤怒耐性": 0.5, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 0.75, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 23006, "name1": "拘束", "name2": "ウーティス", "season": "SEASON 4", "rank": 4, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 1, "色欲": 1, "怠惰": 4, "暴食": 0, "憂鬱": 0, "傲慢": 4, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 2, "憂鬱耐性": 0.5, "傲慢耐性": 0.5, "嫉妬耐性": 0.75}, {"id": 23007, "name1": "次元裂き", "name2": "ウーティス", "season": "SEASON 4 [EVENT]", "rank": 3, "time": 4, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 3, "傲慢": 1, "嫉妬": 4, "憤怒耐性": 2, "色欲耐性": 0.75, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 0.5}, {"id": 23008, "name1": "魔弾", "name2": "ウーティス", "season": "WALPURGISNACHT-V", "rank": 3, "time": 5, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 2, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 4, "嫉妬": 0, "憤怒耐性": 0.75, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 0.5, "嫉妬耐性": 2}, {"id": 23009, "name1": "私はチョキを出すね、そっちは？", "name2": "ウーティス", "season": "SEASON 7", "rank": 1, "time": 7, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 1, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 3, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 0.75}, {"id": 24001, "name1": "ある日突然", "name2": "グレゴール", "season": "恒常", "rank": 1, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 3, "怠惰": 0, "暴食": 0, "憂鬱": 1, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 1, "怠惰耐性": 0.75, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 24002, "name1": "まやかし", "name2": "グレゴール", "season": "SEASON 1", "rank": 1, "time": 1, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 3, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 0.75, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 1}, {"id": 24003, "name1": "提灯", "name2": "グレゴール", "season": "恒常", "rank": 2, "time": 0, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 1, "暴食": 4, "憂鬱": 0, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 0.5, "憂鬱耐性": 1, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 24004, "name1": "AEDD", "name2": "グレゴール", "season": "SEASON 2", "rank": 3, "time": 2, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 3, "傲慢": 0, "嫉妬": 3, "憤怒耐性": 0.5, "色欲耐性": 1, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 2, "傲慢耐性": 1, "嫉妬耐性": 0.75}, {"id": 24005, "name1": "茨の花園", "name2": "グレゴール", "season": "SEASON 3", "rank": 4, "time": 3, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 2, "色欲": 2, "怠惰": 2, "暴食": 2, "憂鬱": 2, "傲慢": 2, "嫉妬": 2, "憤怒耐性": 2, "色欲耐性": 0.5, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 0.5}, {"id": 24006, "name1": "過ぎし日", "name2": "グレゴール", "season": "SEASON 4", "rank": 2, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 1, "打撃": 0, "憤怒": 0, "色欲": 2, "怠惰": 0, "暴食": 0, "憂鬱": 4, "傲慢": 0, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 1, "暴食耐性": 1, "憂鬱耐性": 0.5, "傲慢耐性": 1, "嫉妬耐性": 2}, {"id": 24007, "name1": "厳粛な哀悼", "name2": "グレゴール", "season": "WALPURGISNACHT-IV", "rank": 3, "time": 4, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 0, "色欲": 1, "怠惰": 2, "暴食": 0, "憂鬱": 2, "傲慢": 0, "嫉妬": 2, "憤怒耐性": 2, "色欲耐性": 1, "怠惰耐性": 1, "暴食耐性": 2, "憂鬱耐性": 0.75, "傲慢耐性": 1, "嫉妬耐性": 0.5}, {"id": 24008, "name1": "クリスマスの悪夢", "name2": "グレゴール", "season": "SEASON 5 [EVENT]", "rank": 3, "time": 5, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 0, "色欲": 0, "怠惰": 2, "暴食": 2, "憂鬱": 2, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 0.5, "暴食耐性": 1, "憂鬱耐性": 0.75, "傲慢耐性": 2, "嫉妬耐性": 1}, {"id": 24009, "name1": "輝かざる栄光", "name2": "グレゴール", "season": "COLLABORATION-LIMITED", "rank": 4, "time": 6, "maxState": 4, "斬撃": 1, "貫通": 0, "打撃": 0, "憤怒": 2, "色欲": 0, "怠惰": 3, "暴食": 0, "憂鬱": 0, "傲慢": 2, "嫉妬": 0, "憤怒耐性": 0.5, "色欲耐性": 1, "怠惰耐性": 0.5, "暴食耐性": 2, "憂鬱耐性": 1, "傲慢耐性": 0.75, "嫉妬耐性": 2}, {"id": 24010, "name1": "転入届", "name2": "グレゴール", "season": "SEASON 5", "rank": 4, "time": 7, "maxState": 4, "斬撃": 0, "貫通": 0, "打撃": 1, "憤怒": 1, "色欲": 0, "怠惰": 0, "暴食": 0, "憂鬱": 0, "傲慢": 0, "嫉妬": 5, "憤怒耐性": 1, "色欲耐性": 2, "怠惰耐性": 2, "暴食耐性": 1, "憂鬱耐性": 1, "傲慢耐性": 1, "嫉妬耐性": 0.5}];
+const IDENTITY_CSV_URL = "https://raw.githubusercontent.com/394ast/limbus.search/main/Limbus%20data%20-%20Identity.csv";
+const EGO_CSV_URL = "https://raw.githubusercontent.com/394ast/limbus.search/main/Limbus%20data%20-%20EGO.csv";
+
+let identityData = [];
+let egoData = [];
+let dataLoaded = false;
 
 const IDENTITY_GROUPS = [
-  [1000, "イサン"], [2000, "ファウスト"], [3000, "ドンキホーテ"],
-  [4000, "良秀"], [5000, "ムルソー"], [6000, "ホンル"],
-  [7000, "ヒースクリフ"], [8000, "イシュメール"], [9000, "ロージャ"],
-  [10000, "シンクレア"], [11000, "ウーティス"], [12000, "グレゴール"]
+  [1000,"イサン"],[2000,"ファウスト"],[3000,"ドンキホーテ"],[4000,"良秀"],[5000,"ムルソー"],[6000,"ホンル"],
+  [7000,"ヒースクリフ"],[8000,"イシュメール"],[9000,"ロージャ"],[10000,"シンクレア"],[11000,"ウーティス"],[12000,"グレゴール"]
 ];
-
 const EGO_GROUPS = [
-  [13000, "イサン"], [14000, "ファウスト"], [15000, "ドンキホーテ"],
-  [16000, "良秀"], [17000, "ムルソー"], [18000, "ホンル"],
-  [19000, "ヒースクリフ"], [20000, "イシュメール"], [21000, "ロージャ"],
-  [22000, "シンクレア"], [23000, "ウーティス"], [24000, "グレゴール"]
+  [13000,"イサン"],[14000,"ファウスト"],[15000,"ドンキホーテ"],[16000,"良秀"],[17000,"ムルソー"],[18000,"ホンル"],
+  [19000,"ヒースクリフ"],[20000,"イシュメール"],[21000,"ロージャ"],[22000,"シンクレア"],[23000,"ウーティス"],[24000,"グレゴール"]
 ];
 
-const state = {
-  identity: [],
-  ego: []
-};
+const state = {identity:[],ego:[]};
+const OP_TEXT = {NOT:"¬",AND:"∧",OR:"∨",LPAREN:"(",RPAREN:")"};
 
-const OP_TEXT = {
-  NOT: "¬",
-  AND: "∧",
-  OR: "∨",
-  LPAREN: "(",
-  RPAREN: ")"
-};
-
-function conditionToken(label, fn) {
-  return { type: "condition", label, fn };
-}
-function opToken(type) {
-  return { type: "op", value: type };
-}
-
-function addToken(mode, token) {
-  state[mode].push(token);
-  renderExpression(mode);
-}
-
-function renderExpression(mode) {
-  const el = document.getElementById(mode === "identity" ? "identityExpression" : "egoExpression");
-  const tokens = state[mode];
-  el.innerHTML = "";
-  if (!tokens.length) {
-    el.innerHTML = '<span class="empty-expression">ここに条件が入ります</span>';
-    return;
+function parseCSV(text){
+  const rows=[]; let row=[]; let cell=""; let quoted=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(quoted){
+      if(c==='"'){
+        if(text[i+1]==='"'){cell+='"';i++;} else quoted=false;
+      }else cell+=c;
+    }else{
+      if(c==='"') quoted=true;
+      else if(c===','){row.push(cell);cell="";}
+      else if(c==='\n'){row.push(cell.replace(/\r$/,""));rows.push(row);row=[];cell="";}
+      else cell+=c;
+    }
   }
-  for (const token of tokens) {
-    const span = document.createElement("span");
-    span.className = "token" + (token.type === "op" ? " op" : "");
-    span.textContent = token.type === "op" ? OP_TEXT[token.value] : token.label;
-    el.appendChild(span);
-  }
+  if(cell!==""||row.length){row.push(cell.replace(/\r$/,""));rows.push(row)}
+  if(!rows.length)return [];
+  const headers=rows[0];
+  return rows.slice(1).filter(r=>r.length>1 || r[0]!=="").map(r=>{
+    const obj={}; headers.forEach((h,i)=>{let v=r[i]??""; if(v!=="" && /^-?(?:\d+\.?\d*|\.\d+)$/.test(v)) v=Number(v); obj[h]=v;}); return obj;
+  });
 }
 
-function compare(a, op, b) {
-  switch (op) {
-    case "<=": return a <= b;
-    case "<":  return a < b;
-    case "=":  return a === b;
-    case ">":  return a > b;
-    case ">=": return a >= b;
-    default: throw new Error("比較演算子が不正です。");
+async function loadData(){
+  const status=document.getElementById("dataStatus");
+  try{
+    const [identityResponse,egoResponse]=await Promise.all([fetch(IDENTITY_CSV_URL),fetch(EGO_CSV_URL)]);
+    if(!identityResponse.ok) throw new Error(`人格CSVの取得に失敗しました（${identityResponse.status}）`);
+    if(!egoResponse.ok) throw new Error(`EGO CSVの取得に失敗しました（${egoResponse.status}）`);
+    const [identityText,egoText]=await Promise.all([identityResponse.text(),egoResponse.text()]);
+    identityData=parseCSV(identityText);
+    egoData=parseCSV(egoText);
+    dataLoaded=true;
+    status.textContent=`データ読み込み完了：人格 ${identityData.length}件 / EGO ${egoData.length}件`;
+  }catch(error){
+    dataLoaded=false;
+    status.textContent="データの読み込みに失敗しました。GitHub上のCSVとブラウザのネットワーク接続を確認してください。";
+    console.error(error);
   }
 }
 
-function parseExpression(tokens) {
-  let pos = 0;
-
-  function peek() {
-    return tokens[pos];
-  }
-
-  function consume() {
-    return tokens[pos++];
-  }
-
-  function parseOr() {
-    let left = parseAnd();
-    while (peek()?.type === "op" && peek().value === "OR") {
-      consume();
-      const right = parseAnd();
-      const oldLeft = left;
-      left = row => oldLeft(row) || right(row);
-    }
-    return left;
-  }
-
-  function parseAnd() {
-    let left = parseUnary();
-    while (peek()?.type === "op" && peek().value === "AND") {
-      consume();
-      const right = parseUnary();
-      const oldLeft = left;
-      left = row => oldLeft(row) && right(row);
-    }
-    return left;
-  }
-
-  function parseUnary() {
-    if (peek()?.type === "op" && peek().value === "NOT") {
-      consume();
-      const target = parseUnary();
-      return row => !target(row);
-    }
-    return parsePrimary();
-  }
-
-  function parsePrimary() {
-    const token = peek();
-    if (!token) {
-      throw new Error("条件が必要な場所で式が終わっています。");
-    }
-
-    if (token.type === "condition") {
-      consume();
-      return token.fn;
-    }
-
-    if (token.type === "op" && token.value === "LPAREN") {
-      consume();
-      const inside = parseOr();
-      const close = consume();
-      if (!close || close.type !== "op" || close.value !== "RPAREN") {
-        throw new Error("「(」に対応する「)」がありません。");
-      }
-      return inside;
-    }
-
-    throw new Error("この位置には条件または「(」が必要です。");
-  }
-
-  const fn = parseOr();
-
-  if (pos < tokens.length) {
-    const t = tokens[pos];
-    if (t.type === "op" && t.value === "RPAREN") {
-      throw new Error("対応する「(」がない「)」があります。");
-    }
-    throw new Error("論理式のつなぎ方が不正です。");
-  }
+function conditionToken(label,fn){return {type:"condition",label,fn}}
+function opToken(type){return {type:"op",value:type}}
+function addToken(mode,token){state[mode].push(token);renderExpression(mode)}
+function renderExpression(mode){
+  const el=document.getElementById(mode==="identity"?"identityExpression":"egoExpression"),tokens=state[mode];
+  el.innerHTML="";
+  if(!tokens.length){el.innerHTML='<span class="empty-expression">ここに条件が入ります</span>';return}
+  tokens.forEach(token=>{const span=document.createElement("span");span.className="token"+(token.type==="op"?" op":"");span.textContent=token.type==="op"?OP_TEXT[token.value]:token.label;el.appendChild(span)})
+}
+function compare(a,op,b){switch(op){case "<=":return a<=b;case "<":return a<b;case "=":return a===b;case ">":return a>b;case ">=":return a>=b;default:throw new Error("比較演算子が不正です。")}}
+function parseExpression(tokens){
+  let pos=0;
+  const peek=()=>tokens[pos],consume=()=>tokens[pos++];
+  function parseOr(){let left=parseAnd();while(peek()?.type==="op"&&peek().value==="OR"){consume();const right=parseAnd(),oldLeft=left;left=row=>oldLeft(row)||right(row)}return left}
+  function parseAnd(){let left=parseUnary();while(peek()?.type==="op"&&peek().value==="AND"){consume();const right=parseUnary(),oldLeft=left;left=row=>oldLeft(row)&&right(row)}return left}
+  function parseUnary(){if(peek()?.type==="op"&&peek().value==="NOT"){consume();const target=parseUnary();return row=>!target(row)}return parsePrimary()}
+  function parsePrimary(){const token=peek();if(!token)throw new Error("条件が必要な場所で式が終わっています。");if(token.type==="condition"){consume();return token.fn}if(token.type==="op"&&token.value==="LPAREN"){consume();const inside=parseOr(),close=consume();if(!close||close.type!=="op"||close.value!=="RPAREN")throw new Error("「(」に対応する「)」がありません。");return inside}throw new Error("この位置には条件または「(」が必要です。")}
+  const fn=parseOr();
+  if(pos<tokens.length){const t=tokens[pos];if(t.type==="op"&&t.value==="RPAREN")throw new Error("対応する「(」がない「)」があります。");throw new Error("論理式のつなぎ方が不正です。")}
   return fn;
 }
-
-function setError(mode, message) {
-  document.getElementById(mode === "identity" ? "identityError" : "egoError").textContent = message || "";
-}
-
-function setCount(mode, count) {
-  document.getElementById(mode === "identity" ? "identityCount" : "egoCount").textContent =
-    `該当件数: ${count}`;
-}
-
-function renderResults(mode, rows) {
-  const resultEl = document.getElementById(mode === "identity" ? "identityResults" : "egoResults");
-  resultEl.innerHTML = "";
-
-  const groups = mode === "identity" ? IDENTITY_GROUPS : EGO_GROUPS;
-  const basePath = mode === "identity"
-    ? "https://raw.githubusercontent.com/394ast/limbus.sharetool/main/Identities.After/"
-    : "https://raw.githubusercontent.com/394ast/limbus.sharetool/main/EGO/";
-
-  for (const [baseId, sinner] of groups) {
-    const matched = rows
-      .filter(row => {
-        const id = Number(row.id);
-        return id >= baseId && id < baseId + 1000;
-      })
-      .sort((a, b) => Number(a.id) - Number(b.id));
-
-    const group = document.createElement("div");
-    group.className = "result-group";
-
-    const title = document.createElement("h3");
-    title.textContent = `${baseId}番台：${sinner}`;
-    group.appendChild(title);
-
-    if (!matched.length) {
-      const none = document.createElement("div");
-      none.className = "no-result";
-      none.textContent = `${sinner}：該当なし`;
-      group.appendChild(none);
-    } else {
-      const rowEl = document.createElement("div");
-      rowEl.className = "result-row";
-
-      for (const item of matched) {
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const img = document.createElement("img");
-        img.src = `${basePath}${item.id}.${mode === "identity" ? "3.jpg" : "jpg"}`;
-        img.alt = `${item.name1} ${item.name2}`;
-        img.loading = "lazy";
-
-        const name = document.createElement("div");
-        name.className = "card-name";
-        name.textContent = `${item.name1} / ${item.name2}`;
-
-        const id = document.createElement("div");
-        id.className = "card-id";
-        id.textContent = `ID: ${item.id}`;
-
-        card.appendChild(img);
-        card.appendChild(name);
-        card.appendChild(id);
-        rowEl.appendChild(card);
-      }
+function setError(mode,message){document.getElementById(mode==="identity"?"identityError":"egoError").textContent=message||""}
+function setCount(mode,count){document.getElementById(mode==="identity"?"identityCount":"egoCount").textContent=`該当件数: ${count}`}
+function renderResults(mode,rows){
+  const resultEl=document.getElementById(mode==="identity"?"identityResults":"egoResults"); resultEl.innerHTML="";
+  const groups=mode==="identity"?IDENTITY_GROUPS:EGO_GROUPS;
+  const basePath=mode==="identity"?"https://raw.githubusercontent.com/394ast/limbus.sharetool/main/Identities.After/":"https://raw.githubusercontent.com/394ast/limbus.sharetool/main/EGO/";
+  for(const [baseId,sinner] of groups){
+    const matched=rows.filter(row=>{const id=Number(row.id);return id>=baseId&&id<baseId+1000}).sort((a,b)=>Number(a.id)-Number(b.id));
+    const group=document.createElement("div");group.className="result-group";
+    if(!matched.length){const none=document.createElement("div");none.className="no-result";none.textContent=`${sinner}：該当なし`;group.appendChild(none)}
+    else{
+      const rowEl=document.createElement("div");rowEl.className="result-row";
+      matched.forEach(item=>{
+        const card=document.createElement("div");card.className="card";
+        const img=document.createElement("img");img.src=`${basePath}${item.id}.${mode==="identity"?"3.jpg":"jpg"}`;img.alt=item.name1;img.loading="lazy";
+        const name=document.createElement("div");name.className="card-name";name.textContent=item.name1;
+        card.append(img,name);rowEl.appendChild(card);
+      });
       group.appendChild(rowEl);
     }
-
     resultEl.appendChild(group);
   }
 }
-
-function search(mode) {
-  setError(mode, "");
-  if (!state[mode].length) {
-    setCount(mode, 0);
-    document.getElementById(mode === "identity" ? "identityResults" : "egoResults").innerHTML = "";
-    setError(mode, "論理式を作成してください。");
-    return;
-  }
-
-  try {
-    const predicate = parseExpression(state[mode]);
-    const data = mode === "identity" ? IDENTITY_DATA : EGO_DATA;
-    const minId = mode === "identity" ? 1001 : 13001;
-    const maxId = mode === "identity" ? 13001 : 25001;
-
-    const matched = data.filter(row => {
-      const id = Number(row.id);
-      return id >= minId && id < maxId && predicate(row);
-    });
-
-    setCount(mode, matched.length);
-    renderResults(mode, matched);
-  } catch (e) {
-    setCount(mode, 0);
-    document.getElementById(mode === "identity" ? "identityResults" : "egoResults").innerHTML = "";
-    setError(mode, e.message);
-  }
+function search(mode){
+  setError(mode,"");
+  if(!dataLoaded){setCount(mode,0);setError(mode,"データを読み込めていません。");return}
+  if(!state[mode].length){setCount(mode,0);document.getElementById(mode==="identity"?"identityResults":"egoResults").innerHTML="";setError(mode,"論理式を作成してください。");return}
+  try{
+    const predicate=parseExpression(state[mode]),data=mode==="identity"?identityData:egoData;
+    const minId=mode==="identity"?1001:13001,maxId=mode==="identity"?13001:25001;
+    const matched=data.filter(row=>{const id=Number(row.id);return id>=minId&&id<maxId&&predicate(row)});
+    setCount(mode,matched.length);renderResults(mode,matched);
+  }catch(e){setCount(mode,0);document.getElementById(mode==="identity"?"identityResults":"egoResults").innerHTML="";setError(mode,e.message)}
 }
+function reset(mode){state[mode]=[];renderExpression(mode);setError(mode,"");setCount(mode,0);document.getElementById(mode==="identity"?"identityResults":"egoResults").innerHTML=""}
 
-function reset(mode) {
-  state[mode] = [];
-  renderExpression(mode);
-  setError(mode, "");
-  setCount(mode, 0);
-  document.getElementById(mode === "identity" ? "identityResults" : "egoResults").innerHTML = "";
-}
+document.querySelectorAll(".tab-button").forEach(button=>button.addEventListener("click",()=>{const tab=button.dataset.tab;document.querySelectorAll(".tab-button").forEach(b=>b.classList.toggle("active",b===button));document.getElementById("identityPanel").classList.toggle("active",tab==="identity");document.getElementById("egoPanel").classList.toggle("active",tab==="ego")}));
+document.querySelectorAll(".op-button").forEach(button=>button.addEventListener("click",()=>addToken(button.dataset.mode,opToken(button.dataset.token))));
 
-/* タブ */
-document.querySelectorAll(".tab-button").forEach(button => {
-  button.addEventListener("click", () => {
-    const tab = button.dataset.tab;
-    document.querySelectorAll(".tab-button").forEach(b => b.classList.toggle("active", b === button));
-    document.getElementById("identityPanel").classList.toggle("active", tab === "identity");
-    document.getElementById("egoPanel").classList.toggle("active", tab === "ego");
-  });
-});
+document.getElementById("idResistButton").addEventListener("click",()=>{const key=document.getElementById("idResistSelect").value;const label=`${key}耐性`;const csvKey=`${key}耐性`;addToken("identity",conditionToken(label,row=>Number(row[csvKey])===0.5))});
+document.getElementById("idWeakButton").addEventListener("click",()=>{const key=document.getElementById("idWeakSelect").value;const label=`${key}脆弱`;const csvKey=`${key}耐性`;addToken("identity",conditionToken(label,row=>Number(row[csvKey])===2))});
+document.getElementById("idDefenseButton").addEventListener("click",()=>{const key=document.getElementById("idDefenseSelect").value;const labels={防御:"ガード",回避:"回避",反撃:"反撃",M防御:"マッチ可能ガード",M反撃:"マッチ可能反撃"};addToken("identity",conditionToken(`[${labels[key]}]`,row=>Number(row[key])===1))});
+document.getElementById("idSinButton").addEventListener("click",()=>{const key=document.getElementById("idSinSelect").value;addToken("identity",conditionToken(`[${key}]`,row=>Number(row[key])===1))});
+document.getElementById("idEffectButton").addEventListener("click",()=>{const key=document.getElementById("idEffectSelect").value;addToken("identity",conditionToken(`[${key}]`,row=>Number(row[key])===1))});
 
-/* 論理演算子 */
-document.querySelectorAll(".op-button").forEach(button => {
-  button.addEventListener("click", () => {
-    addToken(button.dataset.mode, opToken(button.dataset.token));
-  });
-});
+document.getElementById("egoRankButton").addEventListener("click",()=>{const rank=Number(document.getElementById("egoRankSelect").value),labels=["","ZAYIN","TETH","HE","WAW","ALEPH"];addToken("ego",conditionToken(`[${labels[rank]}]`,row=>Number(row.rank)===rank))});
+document.getElementById("egoCostButton").addEventListener("click",()=>{const sin=document.getElementById("egoCostSinSelect").value,value=Number(document.getElementById("egoCostValue").value),op=document.getElementById("egoCostOp").value;if(!Number.isInteger(value)||value<0){setError("ego","消費値は0以上の整数にしてください。");return}const labelOp={"<=":"以下","<":"より少ない","=":"に等しい",">":"より多い",">=":"以上"}[op];addToken("ego",conditionToken(`[${sin}]消費${value}${labelOp}`,row=>compare(Number(row[sin]),op,value))) });
+document.getElementById("egoResistButton").addEventListener("click",()=>{const sin=document.getElementById("egoResistSinSelect").value,value=Number(document.getElementById("egoResistValue").value),op=document.getElementById("egoResistOp").value;const labelOp={"<=":"以下","<":"より少ない","=":"に等しい",">":"より多い",">=":"以上"}[op];addToken("ego",conditionToken(`[${sin}]耐性が${value}${labelOp}`,row=>compare(Number(row[`${sin}耐性`]),op,value))) });
 
-/* 人格条件 */
-document.getElementById("idResistButton").addEventListener("click", () => {
-  const key = document.getElementById("idPhysicalSelect").value;
-  const label = `[${key}]耐性`;
-  const csvKey = `${key}耐性`;
-  addToken("identity", conditionToken(label, row => Number(row[csvKey]) === 0.5));
-});
+document.getElementById("identitySearchButton").addEventListener("click",()=>search("identity"));document.getElementById("identityResetButton").addEventListener("click",()=>reset("identity"));document.getElementById("egoSearchButton").addEventListener("click",()=>search("ego"));document.getElementById("egoResetButton").addEventListener("click",()=>reset("ego"));
 
-document.getElementById("idWeakButton").addEventListener("click", () => {
-  const key = document.getElementById("idWeakSelect").value;
-  const label = `[${key}]脆弱`;
-  const csvKey = `${key}耐性`;
-  addToken("identity", conditionToken(label, row => Number(row[csvKey]) === 2));
-});
-
-document.getElementById("idDefenseButton").addEventListener("click", () => {
-  const key = document.getElementById("idDefenseSelect").value;
-  const labels = {
-    "防御": "ガード",
-    "回避": "回避",
-    "反撃": "反撃",
-    "M防御": "マッチ可能ガード",
-    "M反撃": "マッチ可能反撃"
-  };
-  addToken("identity", conditionToken(`[${labels[key]}]`, row => Number(row[key]) === 1));
-});
-
-document.getElementById("idSinButton").addEventListener("click", () => {
-  const key = document.getElementById("idSinSelect").value;
-  addToken("identity", conditionToken(`[${key}]`, row => Number(row[key]) === 1));
-});
-
-document.getElementById("idEffectButton").addEventListener("click", () => {
-  const key = document.getElementById("idEffectSelect").value;
-  addToken("identity", conditionToken(`[${key}]`, row => Number(row[key]) === 1));
-});
-
-/* EGO条件 */
-document.getElementById("egoRankButton").addEventListener("click", () => {
-  const rank = Number(document.getElementById("egoRankSelect").value);
-  const labels = ["", "ZAYIN", "TETH", "HE", "WAW", "ALEPH"];
-  addToken("ego", conditionToken(`[${labels[rank]}]`, row => Number(row.rank) === rank));
-});
-
-document.getElementById("egoCostButton").addEventListener("click", () => {
-  const sin = document.getElementById("egoCostSinSelect").value;
-  const value = Number(document.getElementById("egoCostValue").value);
-  const op = document.getElementById("egoCostOp").value;
-
-  if (!Number.isInteger(value) || value < 0) {
-    setError("ego", "消費値は0以上の整数にしてください。");
-    return;
-  }
-
-  const labelOp = { "<=": "以下", "<": "より少ない", "=": "に等しい", ">": "より多い", ">=": "以上" }[op];
-  addToken("ego", conditionToken(`[${sin}]消費${value}${labelOp}`, row => compare(Number(row[sin]), op, value)));
-});
-
-document.getElementById("egoResistButton").addEventListener("click", () => {
-  const sin = document.getElementById("egoResistSinSelect").value;
-  const value = Number(document.getElementById("egoResistValue").value);
-  const op = document.getElementById("egoResistOp").value;
-
-  const labelOp = { "<=": "以下", "<": "より少ない", "=": "に等しい", ">": "より多い", ">=": "以上" }[op];
-  addToken("ego", conditionToken(`[${sin}]耐性が${value}${labelOp}`, row => compare(Number(row[`${sin}耐性`]), op, value)));
-});
-
-/* 検索・リセット */
-document.getElementById("identitySearchButton").addEventListener("click", () => search("identity"));
-document.getElementById("identityResetButton").addEventListener("click", () => reset("identity"));
-document.getElementById("egoSearchButton").addEventListener("click", () => search("ego"));
-document.getElementById("egoResetButton").addEventListener("click", () => reset("ego"));
+loadData();
 </script>
 </body>
 </html>
