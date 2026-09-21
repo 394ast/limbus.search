@@ -35,6 +35,7 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
   <h1>リンバス人格・E.G.O検索</h1>
   <div class="description">
     <div>・データ入力は私の手入力なので、誤りがある可能性があります</div>
+    <div>・個人的に利用する目的が主のため、更新頻度の低下や、停止の可能性があります</div>
     <div>・プログラムはChatGPTにお任せして私は確認をしてないので、誤りがある可能性があります</div>
     <div>・属性条件は基本攻撃スキルのみを検索対象にしています（例：リアンを憤怒持ち扱いにしていない）</div>
     <div>・状態条件は編成画面のフィルターのみを判断材料にしています（例：ヴァレンチーナを呼吸持ち扱いにしている）</div>
@@ -77,7 +78,7 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
           <select id="idDefenseSelect">
             <option value="防御">ガード</option><option value="回避">回避</option><option value="反撃">反撃</option><option value="M防御">マッチ可能ガード</option><option value="M反撃">マッチ可能反撃</option>
           </select>
-          <button class="condition-button" id="idDefenseButton">条件追加</button>
+          <button class="condition-button" id="idDefenseButton">守備条件追加</button>
         </div>
         <div class="condition-group">
           <select id="idSinSelect">
@@ -114,11 +115,11 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
       <div class="button-row">
         <div class="condition-group">
           <select id="egoRankSelect"><option value="1">ZAYIN</option><option value="2">TETH</option><option value="3">HE</option><option value="4">WAW</option><option value="5">ALEPH</option></select>
-          <button class="condition-button" id="egoRankButton">ランク追加</button>
+          <button class="condition-button" id="egoRankButton">ランク条件追加</button>
         </div>
         <div class="condition-group">
           <select id="egoCostSinSelect"><option value="憤怒">憤怒</option><option value="色欲">色欲</option><option value="怠惰">怠惰</option><option value="暴食">暴食</option><option value="憂鬱">憂鬱</option><option value="傲慢">傲慢</option><option value="嫉妬">嫉妬</option></select>
-          <span>消費</span><input id="egoCostValue" type="number" min="0" step="1" value="0">
+          <span>資源消費</span><input id="egoCostValue" type="number" min="0" step="1" value="0">
           <select id="egoCostOp"><option value="<=">以下</option><option value="<">より少ない</option><option value="=">に等しい</option><option value=">">より多い</option><option value=">=">以上</option></select>
           <button class="condition-button" id="egoCostButton">条件追加</button>
         </div>
