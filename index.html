@@ -103,7 +103,7 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
 
     <div class="section-title">論理式</div>
     <div id="identityExpression" class="expression-box"><span class="empty-expression">ここに条件が入ります</span></div>
-    <div class="action-row"><button id="identitySearchButton" class="search-button">検索</button><button id="identityResetButton" class="reset-button">リセット</button><span id="identityCount" class="result-count"></span></div>
+    <div class="action-row"><button id="identitySearchButton" class="search-button">検索</button><button id="identityUndoButton" class="reset-button">一つ消す</button><button id="identityResetButton" class="reset-button">リセット</button><span id="identityCount" class="result-count"></span></div>
     <div id="identityError" class="error"></div>
     <div id="identityResults"></div>
   </section>
@@ -140,7 +140,7 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
 
     <div class="section-title">論理式</div>
     <div id="egoExpression" class="expression-box"><span class="empty-expression">ここに条件が入ります</span></div>
-    <div class="action-row"><button id="egoSearchButton" class="search-button">検索</button><button id="egoResetButton" class="reset-button">リセット</button><span id="egoCount" class="result-count"></span></div>
+    <div class="action-row"><button id="egoSearchButton" class="search-button">検索</button><button id="egoUndoButton" class="reset-button">一つ消す</button><button id="egoResetButton" class="reset-button">リセット</button><span id="egoCount" class="result-count"></span></div>
     <div id="egoError" class="error"></div>
     <div id="egoResults"></div>
   </section>
@@ -262,6 +262,7 @@ function search(mode){
     setCount(mode,matched.length);renderResults(mode,matched);
   }catch(e){setCount(mode,0);document.getElementById(mode==="identity"?"identityResults":"egoResults").innerHTML="";setError(mode,e.message)}
 }
+function removeLastToken(mode){if(!state[mode].length)return;state[mode].pop();renderExpression(mode)}
 function reset(mode){state[mode]=[];renderExpression(mode);setError(mode,"");setCount(mode,0);document.getElementById(mode==="identity"?"identityResults":"egoResults").innerHTML=""}
 
 document.querySelectorAll(".tab-button").forEach(button=>button.addEventListener("click",()=>{const tab=button.dataset.tab;document.querySelectorAll(".tab-button").forEach(b=>b.classList.toggle("active",b===button));document.getElementById("identityPanel").classList.toggle("active",tab==="identity");document.getElementById("egoPanel").classList.toggle("active",tab==="ego")}));
@@ -278,7 +279,7 @@ document.getElementById("egoRankButton").addEventListener("click",()=>{const ran
 document.getElementById("egoCostButton").addEventListener("click",()=>{const sin=document.getElementById("egoCostSinSelect").value,value=Number(document.getElementById("egoCostValue").value),op=document.getElementById("egoCostOp").value;if(!Number.isInteger(value)||value<0){setError("ego","消費値は0以上の整数にしてください。");return}const labelOp={"<=":"以下","<":"より少ない","=":"に等しい",">":"より多い",">=":"以上"}[op];addToken("ego",conditionToken(`[${sin}]消費${value}${labelOp}`,row=>compare(Number(row[sin]),op,value))) });
 document.getElementById("egoResistButton").addEventListener("click",()=>{const sin=document.getElementById("egoResistSinSelect").value,value=Number(document.getElementById("egoResistValue").value),op=document.getElementById("egoResistOp").value;const labelOp={"<=":"以下","<":"より少ない","=":"に等しい",">":"より多い",">=":"以上"}[op];addToken("ego",conditionToken(`[${sin}]耐性が${value}${labelOp}`,row=>compare(Number(row[`${sin}耐性`]),op,value))) });
 
-document.getElementById("identitySearchButton").addEventListener("click",()=>search("identity"));document.getElementById("identityResetButton").addEventListener("click",()=>reset("identity"));document.getElementById("egoSearchButton").addEventListener("click",()=>search("ego"));document.getElementById("egoResetButton").addEventListener("click",()=>reset("ego"));
+document.getElementById("identitySearchButton").addEventListener("click",()=>search("identity"));document.getElementById("identityUndoButton").addEventListener("click",()=>removeLastToken("identity"));document.getElementById("identityUndoButton").addEventListener("click",()=>removeLastToken("identity"));document.getElementById("identityResetButton").addEventListener("click",()=>reset("identity"));document.getElementById("egoSearchButton").addEventListener("click",()=>search("ego"));document.getElementById("egoUndoButton").addEventListener("click",()=>removeLastToken("ego"));document.getElementById("egoUndoButton").addEventListener("click",()=>removeLastToken("ego"));document.getElementById("egoResetButton").addEventListener("click",()=>reset("ego"));
 
 loadData();
 </script>
