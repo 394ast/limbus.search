@@ -26,6 +26,12 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
 .token{display:inline-block;margin:2px;padding:3px 7px;border-radius:5px;background:#ececec;font-size:14px}.token.op{background:#ddd;font-weight:700}.empty-expression{color:#888}
 .action-row{display:flex;gap:8px;align-items:center;margin-bottom:12px}.search-button,.reset-button{border:0;border-radius:7px;padding:9px 16px;cursor:pointer;color:#fff}.search-button{background:#1f6feb}.reset-button{background:#666}.search-button:hover{background:#1757b8}.reset-button:hover{background:#4e4e4e}.result-count{font-weight:700}
 .error{color:#b00020;margin:8px 0;white-space:pre-wrap}
+.training-section{margin:12px 0 16px;padding:10px;border:1px solid #ddd;border-radius:8px;background:#fafafa}
+.training-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.training-link{display:none}
+.training-url-wrap{display:none;gap:8px;align-items:center;flex-wrap:wrap}
+.training-url-input{width:min(760px,100%);min-width:260px}
+.training-condition{display:none}
 .result-group{margin-top:18px}.result-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}.card{flex:0 0 auto;width:120px;text-align:center}.card img{display:block;width:120px;height:auto;border:1px solid #ccc;border-radius:5px;background:#eee}.card-name{margin-top:4px;font-size:12px;line-height:1.3}.no-result{color:#777;padding:8px 0}
 @media(max-width:700px){.page{padding:10px}.card,.card img{width:96px}.panel{padding:10px}}
 </style>
@@ -46,6 +52,18 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
     <button class="tab-button" data-tab="ego">EGO検索</button>
   </div>
   <div id="dataStatus" class="data-status">データを読み込み中...</div>
+
+  <div class="training-section">
+    <div class="training-controls">
+      <button id="trainingOpenButton" class="condition-button">育成状況を入力する</button>
+      <a id="trainingShareToolLink" class="training-link" href="https://394ast.github.io/limbus.sharetool/" target="_blank" rel="noopener">リンバス所持人格E.G.O共有ツール</a>
+    </div>
+    <div id="trainingUrlWrap" class="training-url-wrap" style="margin-top:8px">
+      <input id="trainingUrlInput" class="training-url-input" type="url" placeholder="limbus.sharetool の共有用URLを入力">
+      <button id="trainingUrlApplyButton" class="condition-button">読み込む</button>
+    </div>
+    <div id="trainingStatus" class="data-status" style="display:none;margin-top:8px"></div>
+  </div>
 
   <section id="identityPanel" class="panel active">
     <div class="control-section">
@@ -98,6 +116,15 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
           </select>
           <button class="condition-button" id="idEffectButton">状態条件追加</button>
         </div>
+        <div id="identityTrainingCondition" class="condition-group training-condition">
+          <select id="identityTrainingLevel">
+            <option value="1">同期1</option><option value="2">同期2</option><option value="3">同期3</option><option value="4">同期4</option>
+          </select>
+          <select id="identityTrainingOp">
+            <option value=">=">以上</option><option value="=">等しい</option><option value="<=">以下</option>
+          </select>
+          <button class="condition-button" id="identityTrainingButton">育成条件追加</button>
+        </div>
       </div>
     </div>
 
@@ -135,6 +162,15 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
           <select id="egoResistOp"><option value="<=">以下</option><option value="<">より少ない</option><option value="=">に等しい</option><option value=">">より多い</option><option value=">=">以上</option></select>
           <button class="condition-button" id="egoResistButton">条件追加</button>
         </div>
+        <div id="egoTrainingCondition" class="condition-group training-condition">
+          <select id="egoTrainingLevel">
+            <option value="1">解析1</option><option value="2">解析2</option><option value="3">解析3</option><option value="4">解析4</option><option value="5">解析5</option>
+          </select>
+          <select id="egoTrainingOp">
+            <option value=">=">以上</option><option value="=">等しい</option><option value="<=">以下</option>
+          </select>
+          <button class="condition-button" id="egoTrainingButton">育成条件追加</button>
+        </div>
       </div>
     </div>
 
@@ -146,6 +182,7 @@ select,input[type=number]{font:inherit;padding:6px 8px;border:1px solid #bbb;bor
   </section>
 </div>
 
+<script src="https://394ast.github.io/limbus.search/limbus-common.js"></script>
 <script>
 const IDENTITY_CSV_URL = "https://raw.githubusercontent.com/394ast/limbus.search/main/Limbus%20data%20-%20Identity.csv";
 const EGO_CSV_URL = "https://raw.githubusercontent.com/394ast/limbus.search/main/Limbus%20data%20-%20EGO.csv";
@@ -251,6 +288,119 @@ function renderResults(mode,rows){
     resultEl.appendChild(group);
   }
 }
+
+let trainingStateById = new Map();
+let trainingStateLoaded = false;
+
+function setTrainingStatus(message, isError = false) {
+  const el = document.getElementById("trainingStatus");
+  el.style.display = "block";
+  el.style.color = isError ? "#b00020" : "#666";
+  el.textContent = message;
+}
+
+function showTrainingConditions(show) {
+  document.querySelectorAll(".training-condition").forEach(el => {
+    el.style.display = show ? "inline-flex" : "none";
+  });
+}
+
+function buildTrainingGroupsData() {
+  const allData = [...identityData, ...egoData];
+  return Array.from({length: 24}, (_, index) => {
+    const groupNumber = index + 1;
+    const ids = allData
+      .filter(row => {
+        const id = Number(row.id);
+        return Number.isInteger(id) && Math.floor(id / 1000) === groupNumber;
+      })
+      .map(row => Number(row.id))
+      .sort((a, b) => a - b);
+
+    return {
+      groupNumber,
+      ids,
+      groupCount: ids.length
+    };
+  });
+}
+
+function loadTrainingUrl(urlText) {
+  setError("identity", "");
+  setError("ego", "");
+
+  if (!dataLoaded) {
+    setTrainingStatus("CSVデータの読み込みが完了してから入力してください。", true);
+    trainingStateLoaded = false;
+    trainingStateById = new Map();
+    showTrainingConditions(false);
+    return;
+  }
+
+  let url;
+  try {
+    url = new URL(urlText.trim());
+  } catch {
+    setTrainingStatus("URLの形式が正しくありません。", true);
+    trainingStateLoaded = false;
+    trainingStateById = new Map();
+    showTrainingConditions(false);
+    return;
+  }
+
+  const imgParam = url.searchParams.get("img");
+  if (!imgParam) {
+    setTrainingStatus("入力したURLに img データがありません。limbus.sharetool の共有URLを入力してください。", true);
+    trainingStateLoaded = false;
+    trainingStateById = new Map();
+    showTrainingConditions(false);
+    return;
+  }
+
+  try {
+    const { codingDiffId, encodedImgData } = parseLimbusImgParam(imgParam);
+    const groupsData = buildTrainingGroupsData();
+    const decompressedImg = decompressLimbusImgData(
+      encodedImgData,
+      groupsData,
+      codingDiffId
+    );
+
+    const stateMap = new Map();
+
+    groupsData.forEach((group, groupIndex) => {
+      group.ids.forEach((id, indexInGroup) => {
+        stateMap.set(
+          id,
+          Number(decompressedImg[
+            groupsData
+              .slice(0, groupIndex)
+              .reduce((sum, previous) => sum + previous.groupCount, 0)
+            + indexInGroup
+          ] ?? 0)
+        );
+      });
+    });
+
+    trainingStateById = stateMap;
+    trainingStateLoaded = true;
+    showTrainingConditions(true);
+
+    const ownedCount = [...stateMap.values()].filter(state => state > 0).length;
+    setTrainingStatus(`育成状況を読み込みました（所持・育成済み ${ownedCount}件）。`);
+  } catch (error) {
+    console.error(error);
+    setTrainingStatus("URLの育成状況を読み込めませんでした。共有URLが正しいか確認してください。", true);
+    trainingStateLoaded = false;
+    trainingStateById = new Map();
+    showTrainingConditions(false);
+  }
+}
+
+function trainingCompare(value, op, target) {
+  return compare(value, op, target);
+}
+
 function search(mode){
   setError(mode,"");
   if(!dataLoaded){setCount(mode,0);setError(mode,"データを読み込めていません。");return}
@@ -278,6 +428,59 @@ document.getElementById("idEffectButton").addEventListener("click",()=>{const ke
 document.getElementById("egoRankButton").addEventListener("click",()=>{const rank=Number(document.getElementById("egoRankSelect").value),labels=["","ZAYIN","TETH","HE","WAW","ALEPH"];addToken("ego",conditionToken(`[${labels[rank]}]`,row=>Number(row.rank)===rank))});
 document.getElementById("egoCostButton").addEventListener("click",()=>{const sin=document.getElementById("egoCostSinSelect").value,value=Number(document.getElementById("egoCostValue").value),op=document.getElementById("egoCostOp").value;if(!Number.isInteger(value)||value<0){setError("ego","消費値は0以上の整数にしてください。");return}const labelOp={"<=":"以下","<":"より少ない","=":"に等しい",">":"より多い",">=":"以上"}[op];addToken("ego",conditionToken(`[${sin}]消費${value}${labelOp}`,row=>compare(Number(row[sin]),op,value))) });
 document.getElementById("egoResistButton").addEventListener("click",()=>{const sin=document.getElementById("egoResistSinSelect").value,value=Number(document.getElementById("egoResistValue").value),op=document.getElementById("egoResistOp").value;const labelOp={"<=":"以下","<":"より少ない","=":"に等しい",">":"より多い",">=":"以上"}[op];addToken("ego",conditionToken(`[${sin}]耐性が${value}${labelOp}`,row=>compare(Number(row[`${sin}耐性`]),op,value))) });
+
+
+document.getElementById("trainingOpenButton").addEventListener("click", () => {
+  const link = document.getElementById("trainingShareToolLink");
+  const wrap = document.getElementById("trainingUrlWrap");
+  const input = document.getElementById("trainingUrlInput");
+
+  link.style.display = "inline-block";
+  wrap.style.display = "flex";
+  input.focus();
+});
+
+document.getElementById("trainingUrlApplyButton").addEventListener("click", () => {
+  loadTrainingUrl(document.getElementById("trainingUrlInput").value);
+});
+
+document.getElementById("trainingUrlInput").addEventListener("keydown", event => {
+  if (event.key === "Enter") {
+    loadTrainingUrl(event.target.value);
+  }
+});
+
+document.getElementById("identityTrainingButton").addEventListener("click", () => {
+  if (!trainingStateLoaded) return;
+
+  const target = Number(document.getElementById("identityTrainingLevel").value);
+  const op = document.getElementById("identityTrainingOp").value;
+  const opText = {">=":"以上","=":"等しい","<=":"以下"}[op];
+
+  addToken(
+    "identity",
+    conditionToken(
+      `[同期${target}${opText}]`,
+      row => trainingCompare(trainingStateById.get(Number(row.id)) ?? 0, op, target)
+    )
+  );
+});
+
+document.getElementById("egoTrainingButton").addEventListener("click", () => {
+  if (!trainingStateLoaded) return;
+
+  const target = Number(document.getElementById("egoTrainingLevel").value);
+  const op = document.getElementById("egoTrainingOp").value;
+  const opText = {">=":"以上","=":"等しい","<=":"以下"}[op];
+
+  addToken(
+    "ego",
+    conditionToken(
+      `[解析${target}${opText}]`,
+      row => trainingCompare(trainingStateById.get(Number(row.id)) ?? 0, op, target)
+    )
+  );
+});
 
 document.getElementById("identitySearchButton").addEventListener("click",()=>search("identity"));document.getElementById("identityUndoButton").addEventListener("click",()=>removeLastToken("identity"));document.getElementById("identityResetButton").addEventListener("click",()=>reset("identity"));document.getElementById("egoSearchButton").addEventListener("click",()=>search("ego"));document.getElementById("egoUndoButton").addEventListener("click",()=>removeLastToken("ego"));document.getElementById("egoResetButton").addEventListener("click",()=>reset("ego"));
 
